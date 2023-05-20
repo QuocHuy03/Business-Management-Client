@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../services/project.service';
+import { ToastrService } from 'ngx-toastr';
+
 @Component({
   selector: 'app-project',
   templateUrl: './project.component.html',
@@ -7,12 +9,12 @@ import { ProjectService } from '../services/project.service';
 })
 export class ProjectComponent implements OnInit {
   projects: any;
-
+  message: any;
   nameProject: string = '';
   teamSize: string = '';
   dateOfStart: string = '';
 
-  constructor(private projectService: ProjectService) {}
+  constructor(private projectService: ProjectService , private toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.getProjects();
@@ -35,30 +37,26 @@ export class ProjectComponent implements OnInit {
         }
       );
     } else if (edit && huydev) {
-      // Chỉnh sửa dự án
       const data = {
         nameProject: huydev.nameProject,
         teamSize: huydev.teamSize,
         dateOfStart: huydev.dateOfStart,
       };
-      console.log(data);
-      // Tiến hành gọi service để cập nhật dự án với dữ liệu mới
-      // this.projectService.update(this.editedProject._id, data).subscribe(
-      //   (response) => {
-      //     this.getProjects();
-      //     // Các tác động khác sau khi cập nhật thành công
-      //   },
-      //   (error) => {
-      //     console.log(error);
-      //   }
-      // );
+      this.projectService.update(huydev._id, data).subscribe(
+        (response) => {
+          this.toastr.success(`${response.message}`, 'Success');
+          this.getProjects();
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
     }
   }
 
   getProjects() {
     this.projectService.get().subscribe(
       (response) => {
-        console.log(response);
         this.projects = response;
       },
       (error) => {

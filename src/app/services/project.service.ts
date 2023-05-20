@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -17,5 +18,7 @@ export class ProjectService {
   getID(id: any) {
     return this.http.get(`${this.baseURL}/getIDProject/${id}`);
   }
-  
+  update(id: any, data: any): Observable<any> {
+    return this.http.put(`${this.baseURL}/updateProject/${id}`, data);
+  }
 }
