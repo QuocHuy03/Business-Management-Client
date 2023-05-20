@@ -1,0 +1,119 @@
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Project</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <button type="button" class="btn btn-success"  data-toggle="modal" data-target="#addModal">
+            Create Project
+          </button>
+      <div class="btn-group ml-2">
+        <button type="button" class="btn btn-outline-secondary">Share</button>
+        <button type="button" class="btn btn-outline-secondary">Export</button>
+      </div>
+   
+    </div>
+  </div>
+  <table id="myTable" class="table-striped table-bordered">
+    <thead>
+      <tr class="text-center">
+        <th>PROJECT ID</th>
+        <th>PROJECT NAME</th>
+        <th>DATE OF START</th>
+        <th>TEAM SIZE</th>
+        <th>ACTIONS</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="text-center">
+        <td>1</td>
+        <td>Project 1</td>
+        <td>20393</td>
+        <td>10</td>
+        <td>
+          <a href="#" class="btn btn-info mr-2" data-toggle="modal" data-target="#editModal">
+            <i class="fas fa-edit"></i>
+            <span> Edit</span>
+          </a>
+          <button class="btn btn-danger">
+            <i class="fas fa-trash"></i>
+            <span> Delete</span>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <!-- Edit Modal -->
+  <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editModalLabel">Edit Project</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="projectId">Project ID:</label>
+              <input type="text" class="form-control" id="projectId" value="1" readonly>
+            </div>
+            <div class="form-group">
+              <label for="projectName">Project Name:</label>
+              <input type="text" class="form-control" id="projectName" value="Project 1">
+            </div>
+            <div class="form-group">
+              <label for="dateOfStart">Date of Start:</label>
+              <input type="text" class="form-control" id="dateOfStart" value="20393">
+            </div>
+            <div class="form-group">
+              <label for="teamSize">Team Size:</label>
+              <input type="text" class="form-control" id="teamSize" value="10">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Add Modal -->
+  <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addModalLabel">Add Project</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="projectId">Project ID:</label>
+              <input type="text" class="form-control" id="projectId" readonly>
+            </div>
+            <div class="form-group">
+              <label for="projectName">Project Name:</label>
+              <input type="text" class="form-control" id="projectName">
+            </div>
+            <div class="form-group">
+              <label for="dateOfStart">Date of Start:</label>
+              <input type="text" class="form-control" id="dateOfStart">
+            </div>
+            <div class="form-group">
+              <label for="teamSize">Team Size:</label>
+              <input type="text" class="form-control" id="teamSize">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="addProjectButton">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
