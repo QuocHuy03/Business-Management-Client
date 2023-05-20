@@ -55,19 +55,19 @@
         <div class="modal-body">
           <form>
             <div class="form-group">
-              <label for="projectId">Project ID:</label>
+              <label for="projectId">Project ID</label>
               <input type="text" class="form-control" id="projectId" value="1" readonly>
             </div>
             <div class="form-group">
-              <label for="projectName">Project Name:</label>
+              <label for="projectName">Project Name</label>
               <input type="text" class="form-control" id="projectName" value="Project 1">
             </div>
             <div class="form-group">
-              <label for="dateOfStart">Date of Start:</label>
+              <label for="dateOfStart">Date of Start</label>
               <input type="text" class="form-control" id="dateOfStart" value="20393">
             </div>
             <div class="form-group">
-              <label for="teamSize">Team Size:</label>
+              <label for="teamSize">Team Size</label>
               <input type="text" class="form-control" id="teamSize" value="10">
             </div>
           </form>
@@ -90,29 +90,25 @@
           </button>
         </div>
         <div class="modal-body">
-          <form>
-            <div class="form-group">
-              <label for="projectId">Project ID:</label>
-              <input type="text" class="form-control" id="projectId" readonly>
-            </div>
-            <div class="form-group">
-              <label for="projectName">Project Name:</label>
-              <input type="text" class="form-control" id="projectName">
-            </div>
-            <div class="form-group">
-              <label for="dateOfStart">Date of Start:</label>
-              <input type="text" class="form-control" id="dateOfStart">
-            </div>
-            <div class="form-group">
-              <label for="teamSize">Team Size:</label>
-              <input type="text" class="form-control" id="teamSize">
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" id="addProjectButton">Add</button>
-        </div>
+            <form>
+              <div class="form-group">
+                <label for="projectName">Project Name:</label>
+                <input type="text" class="form-control" id="nameProject" [(ngModel)]="nameProject" placeholder="Tên Dự Án">
+              </div>
+              <div class="form-group">
+                <label for="dateOfStart">Date of Start:</label>
+                <input type="date" class="form-control" id="dateOfStart" [(ngModel)]="dateOfStart">
+              </div>
+              <div class="form-group">
+                <label for="teamSize">Team Size:</label>
+                <input type="number" class="form-control" id="teamSize" [(ngModel)]="teamSize" placeholder="0">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" (click)="addProject()">Add</button>
+          </div>
       </div>
     </div>
   </div>
