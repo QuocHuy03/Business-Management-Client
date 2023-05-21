@@ -5,19 +5,23 @@ import { ProjectComponent } from './project/project.component';
 import { TaskComponent } from './task/task.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { AuthGuardService } from './helper/auth-guard.service';
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
+    canActivate: [AuthGuardService],
   },
   {
     path: 'project',
     component: ProjectComponent,
+    canActivate: [AuthGuardService],
   },
   {
     path: 'task',
     component: TaskComponent,
+    canActivate: [AuthGuardService],
   },
   {
     path: 'login',
@@ -31,6 +35,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

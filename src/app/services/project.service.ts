@@ -1,31 +1,42 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ApiAccessTokenService } from '../helper/api-access-token.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProjectService {
   private baseURL = 'http://localhost:3000/api';
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private apiAccessTokenService: ApiAccessTokenService
+  ) {}
 
-  add(data: any) {
-    return this.http.post(`${this.baseURL}/addProject`, data);
+  add(data: any): Observable<any> {
+    const headers = this.apiAccessTokenService.createAuthHeader();
+    return this.http.post(`${this.baseURL}/addProject`, data, { headers });
   }
 
-  get() {
-    return this.http.get(`${this.baseURL}/getProjects`);
+  get(): Observable<any> {
+    const headers = this.apiAccessTokenService.createAuthHeader();
+    return this.http.get(`${this.baseURL}/getProjects`, { headers });
   }
 
-  getID(id: any) {
-    return this.http.get(`${this.baseURL}/getIDProject/${id}`);
+  getID(id: any): Observable<any> {
+    const headers = this.apiAccessTokenService.createAuthHeader();
+    return this.http.get(`${this.baseURL}/getIDProject/${id}`, { headers });
   }
 
   update(id: any, data: any): Observable<any> {
-    return this.http.put(`${this.baseURL}/updateProject/${id}`, data);
+    const headers = this.apiAccessTokenService.createAuthHeader();
+    return this.http.put(`${this.baseURL}/updateProject/${id}`, data, {
+      headers,
+    });
   }
 
   delete(id: any): Observable<any> {
-    return this.http.delete(`${this.baseURL}/deleteProject/${id}`);
+    const headers = this.apiAccessTokenService.createAuthHeader();
+    return this.http.delete(`${this.baseURL}/deleteProject/${id}`, { headers });
   }
 }

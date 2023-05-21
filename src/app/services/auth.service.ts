@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -5,14 +6,23 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class AuthService {
-  private baseURL = 'https://localhost:1234/api';
+  private baseURL = 'http://localhost:3000/api';
+  private isLoggedInStatus: boolean = false;
   constructor(private http: HttpClient) {}
 
-  register(userData: any) {
+  register(userData: any): Observable<any> {
     return this.http.post(`${this.baseURL}/register`, userData);
   }
 
-  login(userData: any) {
+  login(userData: any): Observable<any> {
     return this.http.post(`${this.baseURL}/login`, userData);
+  }
+
+  isLoggedIn(): boolean {
+    return this.isLoggedInStatus;
+  }
+
+  setIsLoggedIn(status: boolean): void {
+    this.isLoggedInStatus = status;
   }
 }
