@@ -14,6 +14,8 @@ import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { ProjectService } from './services/project.service';
 import { TaskService } from './services/task.service';
+import { HeaderComponent } from './header/header.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { TaskService } from './services/task.service';
     HomeComponent,
     ProjectComponent,
     TaskComponent,
+    HeaderComponent,
+    SidebarComponent,
   ],
   imports: [
     BrowserModule,

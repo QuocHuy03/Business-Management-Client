@@ -97,7 +97,7 @@ export class TaskComponent implements OnInit {
     this.taskService.delete(id).subscribe(
       (response) => {
         this.toastr.success(`${response.message}`, 'Success');
-        this.getProjects();
+        this.getTask();
       },
       (error) => {
         console.log(error);
