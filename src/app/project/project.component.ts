@@ -9,7 +9,6 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ProjectComponent implements OnInit {
   projects: any;
-  message: any;
   nameProject: string = '';
   teamSize: string = '';
   dateOfStart: string = '';

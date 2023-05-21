@@ -9,7 +9,7 @@ export class TaskService {
   private baseURL = 'http://localhost:3000/api';
   constructor(private http: HttpClient) {}
 
-  add(data: any) {
+  add(data: any): Observable<any> {
     return this.http.post(`${this.baseURL}/addTask`, data);
   }
 

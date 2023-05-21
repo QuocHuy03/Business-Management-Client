@@ -23,16 +23,193 @@
       <th>TASK ID</th>
       <th>TASK NAME</th>
       <th>DESCRIPTION</th>
+      <th>PROJECT NAME</th>
       <th>PRIORITY</th>
       <th>ASSIGNED TO</th>
       <th>STATUS</th>
       <th>ACTIONS</th>
     </tr>
   </thead>
+  <ng-container *ngIf="tasks && tasks.length > 0; else noData">
+    <tr *ngFor="let huydev of tasks">
+      <td class="text-center">{{ huydev._id }}</td>
+      <td class="text-center">{{ huydev.taskName }}</td>
+      <td class="text-center">{{ huydev.description }}</td>
+      <td class="text-center">{{ huydev.idProject.nameProject }}</td>
+      <td class="text-center">{{ huydev.priority }}</td>
+      <td class="text-center">{{ huydev.assignedTo }}</td>
+      <td class="text-center">{{ huydev.status }}</td>
+      <td class="text-center">
+        <button
+          class="btn btn-info mr-2"
+          data-toggle="modal"
+          [attr.data-target]="'#editModal_' + huydev._id"
+        >
+          <i class="fas fa-edit"></i>
+          <span> Edit</span>
+        </button>
+
+        <button class="btn btn-danger" (click)="deleteTask(huydev._id)">
+          <i class="fas fa-trash"></i>
+          <span> Delete</span>
+        </button>
+
+        <!-- Edit Modal -->
+        <div
+          class="modal fade text-left"
+          [id]="'editModal_' + huydev._id"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="editModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">
+                  Edit Task [ {{ huydev.taskName }} ]
+                </h5>
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div class="form-group">
+                    <label for="taskName">Task Name</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="taskName"
+                      [(ngModel)]="huydev.taskName"
+                      name="taskName"
+                      placeholder="Tên Nhiệm Vụ"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea
+                      class="form-control"
+                      id="exampleFormControlTextarea1"
+                      rows="3"
+                      [(ngModel)]="huydev.description"
+                      name="description"
+                      placeholder="Nhập Mô Tả Nhiệm Vụ"
+                    ></textarea>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label for="idProject">Project</label>
+                        <select
+                          class="form-control"
+                          id="idProject"
+                          [(ngModel)]="huydev.idProject._id"
+                          name="idProject"
+                        >
+                          <option value="">Chọn Project</option>
+                          <option
+                            *ngFor="let project of projects"
+                            [value]="project._id"
+                          >
+                            {{ project.nameProject }}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label for="priority">Priority</label>
+                        <select
+                          class="form-control"
+                          id="priority"
+                          [(ngModel)]="huydev.priority"
+                          name="priority"
+                        >
+                          <option value="">Chọn Priority</option>
+                          <option value="High">High</option>
+                          <option value="Medium">Medium</option>
+                          <option value="Low">Low</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label for="assignedTo">Assigned To</label>
+                        <select
+                          class="form-control"
+                          id="assignedTo"
+                          [(ngModel)]="huydev.assignedTo"
+                          name="assignedTo"
+                        >
+                          <option value="">Chọn Assigned To</option>
+                          <option value="John">John</option>
+                          <option value="Alice">Alice</option>
+                          <option value="Bob">Bob</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label for="status">Status</label>
+                        <select
+                          class="form-control"
+                          id="status"
+                          [(ngModel)]="huydev.status"
+                          name="status"
+                        >
+                          <option value="">Chọn Status</option>
+                          <option value="Holding">Holding</option>
+                          <option value="In Progress">In Progress</option>
+                          <option value="Completed">Completed</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  (click)="saveTask(false, true, huydev)"
+                  data-dismiss="modal"
+                >
+                  Save
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </ng-container>
+  <ng-template #noData>
+    <tr class="text-center">
+      <td colspan="7">Empty data ...</td>
+    </tr>
+  </ng-template>
 </table>
 
 <!-- Add Modal -->
-<!-- <div
+<div
   class="modal fade"
   id="addModal"
   tabindex="-1"
@@ -43,7 +220,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="addModalLabel">Add Project</h5>
+        <h5 class="modal-title" id="addModalLabel">Add Task</h5>
         <button
           type="button"
           class="close"
@@ -56,36 +233,99 @@
       <div class="modal-body">
         <form>
           <div class="form-group">
-            <label for="projectName">Project Name</label>
+            <label for="taskName">Task Name</label>
             <input
               type="text"
               class="form-control"
-              id="nameProject"
-              [(ngModel)]="nameProject"
-              name="nameProject"
-              placeholder="Tên Dự Án"
+              id="taskName"
+              [(ngModel)]="taskName"
+              name="taskName"
+              placeholder="Tên Nhiệm Vụ"
             />
           </div>
           <div class="form-group">
-            <label for="dateOfStart">Date of Start</label>
-            <input
-              type="date"
+            <label for="description">Description</label>
+            <textarea
               class="form-control"
-              id="dateOfStart"
-              [(ngModel)]="dateOfStart"
-              name="dateOfStart"
-            />
+              id="exampleFormControlTextarea1"
+              rows="3"
+              [(ngModel)]="description"
+              name="description"
+              placeholder="Nhập Mô Tả Nhiệm Vụ"
+            ></textarea>
           </div>
-          <div class="form-group">
-            <label for="teamSize">Team Size</label>
-            <input
-              type="number"
-              class="form-control"
-              id="teamSize"
-              [(ngModel)]="teamSize"
-              name="teamSize"
-              placeholder="0"
-            />
+
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="idProject">Project</label>
+                <select
+                  class="form-control"
+                  id="idProject"
+                  [(ngModel)]="idProject"
+                  name="idProject"
+                >
+                  <option value="">Chọn Project</option>
+                  <option
+                    *ngFor="let project of projects"
+                    [value]="project._id"
+                  >
+                    {{ project.nameProject }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="priority">Priority</label>
+                <select
+                  class="form-control"
+                  id="priority"
+                  [(ngModel)]="priority"
+                  name="priority"
+                >
+                  <option value="">Chọn Priority</option>
+                  <option value="High">High</option>
+                  <option value="Medium">Medium</option>
+                  <option value="Low">Low</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="assignedTo">Assigned To</label>
+                <select
+                  class="form-control"
+                  id="assignedTo"
+                  [(ngModel)]="assignedTo"
+                  name="assignedTo"
+                >
+                  <option value="">Chọn Assigned To</option>
+                  <option value="John">John</option>
+                  <option value="Alice">Alice</option>
+                  <option value="Bob">Bob</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="status">Status</label>
+                <select
+                  class="form-control"
+                  id="status"
+                  [(ngModel)]="status"
+                  name="status"
+                >
+                  <option value="">Chọn Status</option>
+                  <option value="Holding">Holding</option>
+                  <option value="In Progress">In Progress</option>
+                  <option value="Completed">Completed</option>
+                </select>
+              </div>
+            </div>
           </div>
         </form>
       </div>
@@ -97,12 +337,12 @@
         <button
           type="button"
           class="btn btn-primary"
-          (click)="saveProject(true, false, null)"
           data-dismiss="modal"
+          (click)="saveTask(true, false, null)"
         >
           Add
         </button>
       </div>
     </div>
   </div>
-</div> -->
+</div>

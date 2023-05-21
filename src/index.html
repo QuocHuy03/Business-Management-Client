@@ -12,10 +12,6 @@
     />
     <link
       rel="stylesheet"
-      href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css"
-    />
-    <link
-      rel="stylesheet"
       href="https://getbootstrap.com/docs/4.6/examples/dashboard/dashboard.css"
     />
     <link
@@ -34,17 +30,14 @@
       body {
         font-family: "Roboto", sans-serif;
       }
+      .table td,
+      .table th {
+        vertical-align: unset;
+      }
     </style>
     <app-root></app-root>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="https://getbootstrap.com/docs/4.6/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"></script>
-    <script>
-      $(document).ready(function () {
-        let table = $("#myTable").DataTable();
-      });
-    </script>
   </body>
 </html>
