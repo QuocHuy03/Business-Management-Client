@@ -14,12 +14,12 @@ export class AuthGuardService implements CanActivate {
   ) {}
 
   canActivate(): boolean {
-    if (this.authService.isLoggedIn() && this.apiAccessTokenService.getAccessToken()) {
-      console.log("đã đăng nhập")
+    if (this.apiAccessTokenService.getAccessToken()) {
+      console.log('đã đăng nhập');
       return true;
     } else {
       this.router.navigate(['/login']);
-      console.log("k vào")
+      console.log('k vào');
       return false;
     }
   }

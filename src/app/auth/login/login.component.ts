@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { ApiAccessTokenService } from 'src/app/helper/api-access-token.service';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -15,6 +16,7 @@ export class LoginComponent {
   constructor(
     private authService: AuthService,
     private toastr: ToastrService,
+    private apiAccessTokenService: ApiAccessTokenService,
     private router: Router
   ) {}
   loginUser() {
@@ -24,7 +26,14 @@ export class LoginComponent {
         if (response.status === true) {
           this.toastr.success(`${response.message}`, 'Success');
           localStorage.setItem('accessToken', response.accessToken);
-          this.authService.setIsLoggedIn(true);
+          this.apiAccessTokenService.get().subscribe(
+            (response) => {
+              // Xử lý phản hồi từ backend
+            },
+            (error) => {
+              // Xử lý lỗi
+            }
+          );
           this.router.navigate(['project']);
         } else {
           this.toastr.error(`${response.message}`, 'Error');
