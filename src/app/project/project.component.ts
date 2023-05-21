@@ -14,7 +14,10 @@ export class ProjectComponent implements OnInit {
   teamSize: string = '';
   dateOfStart: string = '';
 
-  constructor(private projectService: ProjectService , private toastr: ToastrService) {}
+  constructor(
+    private projectService: ProjectService,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {
     this.getProjects();
@@ -29,6 +32,7 @@ export class ProjectComponent implements OnInit {
       };
       this.projectService.add(data).subscribe(
         (response) => {
+          this.toastr.success(`Thêm Project Thành Công`, 'Success');
           this.getProjects();
           this.clearForm();
         },
@@ -52,6 +56,18 @@ export class ProjectComponent implements OnInit {
         }
       );
     }
+  }
+
+  deleteProject(id: any) {
+    this.projectService.delete(id).subscribe(
+      (response) => {
+        this.toastr.success(`${response.message}`, 'Success');
+        this.getProjects();
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   getProjects() {

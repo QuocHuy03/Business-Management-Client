@@ -12,6 +12,8 @@ import { ProjectComponent } from './project/project.component';
 import { TaskComponent } from './task/task.component';
 import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
+import { ProjectService } from './services/project.service';
+import { TaskService } from './services/task.service';
 
 @NgModule({
   declarations: [
@@ -28,9 +30,9 @@ import { ToastrModule } from 'ngx-toastr';
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
   ],
-  providers: [AuthService],
+  providers: [AuthService, ProjectService, TaskService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

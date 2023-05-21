@@ -1,14 +1,108 @@
-
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Task</h1>
-    <div class="btn-toolbar mb-2 mb-md-0">
-      <div class="btn-group mr-2">
-        <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-        <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-      </div>
-      <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-        <span data-feather="calendar"></span>
-        This week
-      </button>
+<div
+  class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+>
+  <h1 class="h2">Task</h1>
+  <div class="btn-toolbar mb-2 mb-md-0">
+    <button
+      type="button"
+      class="btn btn-success"
+      data-toggle="modal"
+      data-target="#addModal"
+    >
+      Create Task
+    </button>
+    <div class="btn-group ml-2">
+      <button type="button" class="btn btn-outline-secondary">Share</button>
+      <button type="button" class="btn btn-outline-secondary">Export</button>
     </div>
   </div>
+</div>
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr class="text-center">
+      <th>TASK ID</th>
+      <th>TASK NAME</th>
+      <th>DESCRIPTION</th>
+      <th>PRIORITY</th>
+      <th>ASSIGNED TO</th>
+      <th>STATUS</th>
+      <th>ACTIONS</th>
+    </tr>
+  </thead>
+</table>
+
+<!-- Add Modal -->
+<!-- <div
+  class="modal fade"
+  id="addModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="addModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addModalLabel">Add Project</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="projectName">Project Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="nameProject"
+              [(ngModel)]="nameProject"
+              name="nameProject"
+              placeholder="Tên Dự Án"
+            />
+          </div>
+          <div class="form-group">
+            <label for="dateOfStart">Date of Start</label>
+            <input
+              type="date"
+              class="form-control"
+              id="dateOfStart"
+              [(ngModel)]="dateOfStart"
+              name="dateOfStart"
+            />
+          </div>
+          <div class="form-group">
+            <label for="teamSize">Team Size</label>
+            <input
+              type="number"
+              class="form-control"
+              id="teamSize"
+              [(ngModel)]="teamSize"
+              name="teamSize"
+              placeholder="0"
+            />
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="saveProject(true, false, null)"
+          data-dismiss="modal"
+        >
+          Add
+        </button>
+      </div>
+    </div>
+  </div>
+</div> -->
