@@ -16,6 +16,7 @@ import { ProjectService } from './services/project.service';
 import { TaskService } from './services/task.service';
 import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     TaskComponent,
     HeaderComponent,
     SidebarComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

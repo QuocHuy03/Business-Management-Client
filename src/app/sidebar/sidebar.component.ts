@@ -8,13 +8,11 @@ import { AuthService } from '../services/auth.service';
 })
 export class SidebarComponent implements OnInit {
   level!: string | null;
-  constructor(private authService: AuthService) {
-    this.level = localStorage.getItem('level');
-  }
+  constructor(private authService: AuthService) {}
   ngOnInit(): void {
     this.authService.huyit.subscribe((level) => {
-      console.log(level);
       this.level = level;
     });
+    this.level = this.authService.getLevel();
   }
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { ApiAccessTokenService } from './api-access-token.service';
 
@@ -13,23 +13,27 @@ export class AuthGuardService implements CanActivate {
     private apiAccessTokenService: ApiAccessTokenService
   ) {}
 
-  canActivate(): boolean {
+  canActivate(route: ActivatedRouteSnapshot): boolean {
     const accessToken = this.apiAccessTokenService.getAccessToken();
-    
+    const routePath = route.routeConfig?.path; // lấy đường dẫn router
+
     if (accessToken) {
-      this.authService.huyit.subscribe((level) => {
-        if (level === 'team-leader') {
-          return true; // Allow access for team leaders
-        } else {
-          this.router.navigate(['access-denied']); // Redirect to access-denied page for other levels
+      const level = this.authService.getLevel();
+      if (level === 'leader') {
+        return true;
+      } else if (level === 'employee') {
+        if (routePath !== 'task') {
+          this.router.navigate(['access-denied']);
           return false;
         }
-      });
-      return false;
+      } else {
+        this.router.navigate(['access-denied']);
+        return false;
+      }
     } else {
       this.router.navigate(['/login']);
       return false;
     }
+    return true;
   }
-  
 }
