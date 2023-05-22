@@ -1,1 +1,277 @@
-<p>home works!</p>
+<app-header></app-header>
+<div class="container-fluid">
+  <div class="row">
+    <app-sidebar></app-sidebar>
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+      <!-- Start -->
+      <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+      >
+        <h1 class="h2">Dashboard</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <div class="btn-group ml-2">
+            <button type="button" class="btn btn-outline-secondary">
+              Share
+            </button>
+            <button type="button" class="btn btn-outline-secondary">
+              Export
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="row bg-secondary bg-gradient mt-4 px-2 py-3">
+        <div class="col-md-3 col-sm-6 text-center">
+          <h6 class="text-white">TRƯỞNG NHÓM</h6>
+          <img
+            class="rounded-circle w-25"
+            src="https://i.imgur.com/bbnrc1T.png"
+            alt=""
+          />
+          <p class="fw-bold text-white">QuocHuy</p>
+          <ul class="list-group mt-5">
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center"
+            >
+              Số Lượng Thành Viên
+              <span class="badge bg-primary rounded-pill text-white">{{
+                totalAllUsers.length
+              }}</span>
+            </li>
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center"
+            >
+              Tổng Chi Phí Của Dự Án
+              <span class="badge bg-primary rounded-pill text-white"
+                >937232</span
+              >
+            </li>
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center"
+            >
+              Các task đang xử lý
+              <span class="badge bg-primary rounded-pill text-white">@</span>
+            </li>
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center"
+            >
+              Dự án sắp triển khai
+              <span class="badge bg-primary rounded-pill text-white">1</span>
+            </li>
+          </ul>
+          <p class="mt-3 text-white fw-bold">KHÁCH HÀNG</p>
+          <ul class="list-group">
+            <li class="list-group-item">Sơn Tùng MTP</li>
+            <li class="list-group-item">Jack 5 củ</li>
+            <li class="list-group-item">Đen Vâu</li>
+            <li class="list-group-item">Trấn Thành Cry</li>
+          </ul>
+        </div>
+        <div class="col-md-6 col-sm-12">
+          <div class="d-flex justify-content-between">
+            <select
+              class="form-control w-auto"
+              aria-label="Default select example"
+            >
+              <option>Project 1</option>
+            </select>
+            <select
+              class="form-control w-auto"
+              aria-label="Default select example"
+            >
+              <option>20-20-2003</option>
+            </select>
+          </div>
+          <div class="mt-4 bg-light px-2 py-2">
+            <div class="mb-5">
+              <h6 class="text-center bg-gradient bg-dark text-white py-2">
+                TỔNG THỂ VỀ DỰ ÁN
+              </h6>
+              <table class="table caption-top">
+                <tbody>
+                  <tr>
+                    <td>Chi phí dự án</td>
+                    <td>$2,113,507</td>
+                  </tr>
+                  <tr>
+                    <td>Hiện tại đã chi</td>
+                    <td>$93,507</td>
+                  </tr>
+                  <tr>
+                    <td>Còn lại</td>
+                    <td>$52,788</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="mb-5">
+              <h6 class="text-center bg-gradient bg-dark text-white py-2">
+                THÀNH VIÊN CỦA NHÓM
+              </h6>
+              <table class="table caption-top">
+                <thead>
+                  <tr>
+                    <th scope="col">Khu vực</th>
+                    <th scope="col">Số lượng nhân viên</th>
+                    <th scope="col">Nhân viên tạm nghỉ</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">East</th>
+                    <td>5</td>
+                    <td>4</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">West</th>
+                    <td>3</td>
+                    <td>4</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">South</th>
+                    <td>5</td>
+                    <td>4</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">North</th>
+                    <td>5</td>
+                    <td>4</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <div class="bg-light">
+            <h6 class="text-center bg-dark bg-gradient text-white py-2">
+              THÀNH VIÊN THEO KHU VỰC
+            </h6>
+            <div id="accordion">
+              <div class="huyit">
+                <div id="headingOne">
+                  <button
+                    class="btn w-100"
+                    data-toggle="collapse"
+                    data-target="#collapseOne"
+                    aria-expanded="true"
+                    aria-controls="collapseOne"
+                  >
+                    East
+                  </button>
+                </div>
+                <div
+                  id="collapseOne"
+                  class="collapse show"
+                  aria-labelledby="headingOne"
+                  data-parent="#accordion"
+                >
+                  <div>
+                    <table class="table-area">
+                      <tbody>
+                        <tr>
+                          <th class="bg-warning" scope="row">#</th>
+                          <td>Available</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="huyit">
+                <div id="headingTwo">
+                  <button
+                    class="btn w-100 collapsed"
+                    data-toggle="collapse"
+                    data-target="#collapseTwo"
+                    aria-expanded="false"
+                    aria-controls="collapseTwo"
+                  >
+                    West
+                  </button>
+                </div>
+                <div
+                  id="collapseTwo"
+                  class="collapse"
+                  aria-labelledby="headingTwo"
+                  data-parent="#accordion"
+                >
+                  <div>
+                    <table class="table-area">
+                      <tbody>
+                        <tr>
+                          <th class="bg-warning" scope="row">#</th>
+                          <td>Available</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="huyit">
+                <div id="headingThree">
+                  <button
+                    class="btn w-100 collapsed"
+                    data-toggle="collapse"
+                    data-target="#collapseThree"
+                    aria-expanded="false"
+                    aria-controls="collapseThree"
+                  >
+                    South
+                  </button>
+                </div>
+                <div
+                  id="collapseThree"
+                  class="collapse"
+                  aria-labelledby="headingThree"
+                  data-parent="#accordion"
+                >
+                  <div>
+                    <table class="table-area">
+                      <tbody>
+                        <tr>
+                          <th class="bg-warning" scope="row">12</th>
+                          <td>Available</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="huyit">
+                <div id="headingFour">
+                  <button
+                    class="btn w-100 collapsed"
+                    data-toggle="collapse"
+                    data-target="#collapseFour"
+                    aria-expanded="false"
+                    aria-controls="collapseFour"
+                  >
+                    North
+                  </button>
+                </div>
+                <div
+                  id="collapseFour"
+                  class="collapse"
+                  aria-labelledby="headingFour"
+                  data-parent="#accordion"
+                >
+                  <div>
+                    <table class="table-area">
+                      <tbody>
+                        <tr>
+                          <th class="bg-warning" scope="row"></th>
+                          <td>Available</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end -->
+    </main>
+  </div>
+</div>

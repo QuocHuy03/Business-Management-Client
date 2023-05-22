@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AreaService } from 'src/app/services/area.service';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -8,21 +9,41 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
   username: string = '';
   email: string = '';
+  area: string = '';
   password: string = '';
+
+  areas: any;
 
   constructor(
     private authService: AuthService,
+    private areaService: AreaService,
     private toastr: ToastrService,
     private router: Router
   ) {}
+
+  ngOnInit(): void {
+    this.getArea();
+  }
+
+  getArea() {
+    this.areaService.get().subscribe(
+      (response) => {
+        this.areas = response;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
 
   registerUser() {
     const userData = {
       username: this.username,
       email: this.email,
+      area: this.area,
       password: this.password,
     };
     this.authService.register(userData).subscribe(

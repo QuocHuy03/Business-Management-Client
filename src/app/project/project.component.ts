@@ -12,6 +12,8 @@ export class ProjectComponent implements OnInit {
   nameProject: string = '';
   teamSize: string = '';
   dateOfStart: string = '';
+  budget: string = '';
+  status: string = '';
 
   constructor(
     private projectService: ProjectService,
@@ -28,6 +30,8 @@ export class ProjectComponent implements OnInit {
         nameProject: this.nameProject,
         teamSize: this.teamSize,
         dateOfStart: this.dateOfStart,
+        budget: this.budget,
+        status: this.status,
       };
       this.projectService.add(data).subscribe(
         (response) => {
@@ -44,6 +48,8 @@ export class ProjectComponent implements OnInit {
         nameProject: huydev.nameProject,
         teamSize: huydev.teamSize,
         dateOfStart: huydev.dateOfStart,
+        budget: huydev.budget,
+        status: huydev.status,
       };
       this.projectService.update(huydev._id, data).subscribe(
         (response) => {
@@ -84,5 +90,7 @@ export class ProjectComponent implements OnInit {
     this.nameProject = '';
     this.teamSize = '';
     this.dateOfStart = '';
+    this.budget = '';
+    this.status = '';
   }
 }

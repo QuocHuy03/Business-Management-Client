@@ -33,4 +33,10 @@ export class AuthService {
   setLevel(level: string | null) {
     this.levelSubject.next(level);
   }
+
+  // get users
+  
+  getUsers(): Observable<any> {
+    return this.http.get(`${this.baseURL}/getUsers`);
+  }
 }

@@ -34,6 +34,8 @@
             <th>PROJECT NAME</th>
             <th>DATE OF START</th>
             <th>TEAM SIZE</th>
+            <th>BUDGET</th>
+            <th>STATUS</th>
             <th>ACTIONS</th>
           </tr>
         </thead>
@@ -44,6 +46,8 @@
               <td class="text-center">{{ huydev.nameProject }}</td>
               <td class="text-center">{{ huydev.dateOfStart }}</td>
               <td class="text-center">{{ huydev.teamSize }}</td>
+              <td class="text-center">{{ huydev.budget | currency }}</td>
+              <td class="text-center" style="text-transform: capitalize;">{{ huydev.status }}</td>
               <td class="text-center">
                 <button
                   class="btn btn-info mr-2"
@@ -120,6 +124,32 @@
                               placeholder="0"
                             />
                           </div>
+                          <div class="form-group">
+                            <label for="status">Status</label>
+                            <select
+                              class="form-control"
+                              id="status"
+                              name="status"
+                              [(ngModel)]="huydev.status"
+                            >
+                              <option value="">Chọn Trạng Thái</option>
+                              <option value="deployment">Triển Khai</option>
+                              <option value="processing">Đang Xử Lý</option>
+                              <option value="complete">Hoàn Thành</option>
+                              <option value="cancel">Hủy Bỏ</option>
+                            </select>
+                          </div>
+                          <div class="form-group">
+                            <label for="budget">Budget</label>
+                            <input
+                              type="number"
+                              class="form-control"
+                              id="budget"
+                              [(ngModel)]="huydev.budget"
+                              name="budget"
+                              placeholder="100,000,000"
+                            />
+                          </div>
                         </form>
                       </div>
 
@@ -148,7 +178,7 @@
           </ng-container>
           <ng-template #noData>
             <tr class="text-center">
-              <td colspan="5">Empty data ...</td>
+              <td colspan="7">Empty data ...</td>
             </tr>
           </ng-template>
         </tbody>
@@ -207,6 +237,32 @@
                     [(ngModel)]="teamSize"
                     name="teamSize"
                     placeholder="0"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="status">Status</label>
+                  <select
+                    class="form-control"
+                    id="status"
+                    name="status"
+                    [(ngModel)]="status"
+                  >
+                    <option value="">Chọn Trạng Thái</option>
+                    <option value="deployment">Triển Khai</option>
+                    <option value="processing">Đang Xử Lý</option>
+                    <option value="complete">Hoàn Thành</option>
+                    <option value="cancel">Hủy Bỏ</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="budget">Budget</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="budget"
+                    [(ngModel)]="budget"
+                    name="budget"
+                    placeholder="100,000,000"
                   />
                 </div>
               </form>

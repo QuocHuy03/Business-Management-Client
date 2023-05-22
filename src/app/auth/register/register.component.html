@@ -33,6 +33,20 @@
                   />
                 </div>
                 <div class="form-floating mb-3">
+                  <label for="username">Area</label>
+                  <select
+                    id="area"
+                    class="form-control"
+                    [(ngModel)]="area"
+                    name="area"
+                  >
+                    <option value="" >Chọn Area</option>
+                    <option *ngFor="let huydev of areas" [value]="huydev._id">
+                      {{ huydev.nameArea }}
+                    </option>
+                  </select>
+                </div>
+                <div class="form-floating mb-3">
                   <label for="password">Password</label>
                   <input
                     type="password"
