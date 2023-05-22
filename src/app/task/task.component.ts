@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../services/project.service';
 import { ToastrService } from 'ngx-toastr';
 import { TaskService } from '../services/task.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-task',
@@ -11,6 +12,7 @@ import { TaskService } from '../services/task.service';
 export class TaskComponent implements OnInit {
   projects: any;
   tasks: any;
+  users: any;
 
   taskName: string = '';
   description: string = '';
@@ -22,12 +24,14 @@ export class TaskComponent implements OnInit {
   constructor(
     private projectService: ProjectService,
     private taskService: TaskService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
     this.getTask();
     this.getProjects();
+    this.getUsers();
   }
 
   getProjects() {
@@ -45,6 +49,17 @@ export class TaskComponent implements OnInit {
     this.taskService.get().subscribe(
       (response) => {
         this.tasks = response;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  getUsers() {
+    this.authService.getUsers().subscribe(
+      (response) => {
+        this.users = response;
       },
       (error) => {
         console.log(error);

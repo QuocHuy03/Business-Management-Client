@@ -47,7 +47,7 @@
             <td class="text-center">{{ huydev.description }}</td>
             <td class="text-center">{{ huydev.idProject.nameProject }}</td>
             <td class="text-center">{{ huydev.priority }}</td>
-            <td class="text-center">{{ huydev.assignedTo }}</td>
+            <td class="text-center">{{ huydev.assignedTo.username }}</td>
             <td class="text-center">{{ huydev.status }}</td>
             <td class="text-center">
               <button
@@ -313,9 +313,12 @@
                         name="assignedTo"
                       >
                         <option value="">Chọn Assigned To</option>
-                        <option value="John">John</option>
-                        <option value="Alice">Alice</option>
-                        <option value="Bob">Bob</option>
+                        <option
+                        *ngFor="let quochuy of users"
+                        value="{{ quochuy._id }}"
+                      >
+                        {{ quochuy.username }}
+                      </option>
                       </select>
                     </div>
                   </div>
