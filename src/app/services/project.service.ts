@@ -22,10 +22,10 @@ export class ProjectService {
     const headers = this.apiAccessTokenService.createAuthHeader();
     return this.http.get(`${this.baseURL}/getProjects`, { headers });
   }
-  
+
   getSelect(selectedValue: any): Observable<any> {
     const headers = this.apiAccessTokenService.createAuthHeader();
-    const params = { selectedValue: selectedValue }; // Truyền giá trị selectedValue như một tham số trong query params
+    const params = { huydev: selectedValue };
     return this.http.get(`${this.baseURL}/getProjects`, { headers, params });
   }
 
