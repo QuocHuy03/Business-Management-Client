@@ -14,13 +14,22 @@ export class AuthGuardService implements CanActivate {
   ) {}
 
   canActivate(): boolean {
-    if (this.apiAccessTokenService.getAccessToken()) {
-      console.log('đã đăng nhập');
-      return true;
+    const accessToken = this.apiAccessTokenService.getAccessToken();
+    
+    if (accessToken) {
+      this.authService.huyit.subscribe((level) => {
+        if (level === 'team-leader') {
+          return true; // Allow access for team leaders
+        } else {
+          this.router.navigate(['access-denied']); // Redirect to access-denied page for other levels
+          return false;
+        }
+      });
+      return false;
     } else {
       this.router.navigate(['/login']);
-      console.log('k vào');
       return false;
     }
   }
+  
 }

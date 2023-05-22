@@ -28,10 +28,11 @@ export class LoginComponent {
           localStorage.setItem('accessToken', response.accessToken);
           this.apiAccessTokenService.get().subscribe(
             (response) => {
-              // Xử lý phản hồi từ backend
+              localStorage.setItem('level', response.level);
+              this.authService.setLevel(response.level);
             },
             (error) => {
-              // Xử lý lỗi
+              console.log(error);
             }
           );
           this.router.navigate(['project']);

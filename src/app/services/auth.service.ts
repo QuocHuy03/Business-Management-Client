@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -7,7 +7,8 @@ import { Injectable } from '@angular/core';
 })
 export class AuthService {
   private baseURL = 'http://localhost:3000/api';
-  private isLoggedInStatus: boolean = false;
+  private levelSubject: Subject<string | null> = new Subject<string | null>();
+
   constructor(private http: HttpClient) {}
 
   register(userData: any): Observable<any> {
@@ -18,11 +19,11 @@ export class AuthService {
     return this.http.post(`${this.baseURL}/login`, userData);
   }
 
-  isLoggedIn(): boolean {
-    return this.isLoggedInStatus;
-  }
+  // load khi vô nó hiển thị luôn
 
-  setIsLoggedIn(status: boolean): void {
-    this.isLoggedInStatus = status;
+  huyit = this.levelSubject.asObservable();
+
+  setLevel(level: string | null) {
+    this.levelSubject.next(level);
   }
 }
