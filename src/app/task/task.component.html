@@ -48,7 +48,9 @@
             <td class="text-center">{{ huydev.idProject.nameProject }}</td>
             <td class="text-center">{{ huydev.priority }}</td>
             <td class="text-center">{{ huydev.assignedTo.username }}</td>
-            <td class="text-center">{{ huydev.status }}</td>
+            <td class="text-center" style="text-transform: capitalize">
+              {{ huydev.status }}
+            </td>
             <td class="text-center">
               <button
                 class="btn btn-info mr-2"
@@ -158,13 +160,16 @@
                               <select
                                 class="form-control"
                                 id="assignedTo"
-                                [(ngModel)]="huydev.assignedTo"
+                                [(ngModel)]="huydev.assignedTo._id"
                                 name="assignedTo"
                               >
                                 <option value="">Chọn Assigned To</option>
-                                <option value="John">John</option>
-                                <option value="Alice">Alice</option>
-                                <option value="Bob">Bob</option>
+                                <option
+                                  *ngFor="let quochuy of users"
+                                  [value]="quochuy._id"
+                                >
+                                  {{ quochuy.username }}
+                                </option>
                               </select>
                             </div>
                           </div>
@@ -178,9 +183,8 @@
                                 name="status"
                               >
                                 <option value="">Chọn Status</option>
-                                <option value="Holding">Holding</option>
-                                <option value="In Progress">In Progress</option>
-                                <option value="Completed">Completed</option>
+                                <option value="processing">Processing</option>
+                                <option value="complete">Complete</option>
                               </select>
                             </div>
                           </div>
@@ -314,11 +318,11 @@
                       >
                         <option value="">Chọn Assigned To</option>
                         <option
-                        *ngFor="let quochuy of users"
-                        value="{{ quochuy._id }}"
-                      >
-                        {{ quochuy.username }}
-                      </option>
+                          *ngFor="let quochuy of users"
+                          value="{{ quochuy._id }}"
+                        >
+                          {{ quochuy.username }}
+                        </option>
                       </select>
                     </div>
                   </div>
@@ -332,9 +336,8 @@
                         name="status"
                       >
                         <option value="">Chọn Status</option>
-                        <option value="Holding">Holding</option>
-                        <option value="In Progress">In Progress</option>
-                        <option value="Completed">Completed</option>
+                        <option value="processing">Processing</option>
+                        <option value="complete">Complete</option>
                       </select>
                     </div>
                   </div>

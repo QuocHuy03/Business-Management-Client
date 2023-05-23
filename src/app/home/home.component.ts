@@ -10,12 +10,13 @@ import { ProjectService } from '../services/project.service';
 export class HomeComponent implements OnInit {
   totalAllUsers: any[] = [];
   listAllProjects: any;
+  listIDProject: any;
+  lengthProjectDeployment: any;
 
   constructor(
     private authService: AuthService,
     private projectService: ProjectService
   ) {}
-
 
   ngOnInit(): void {
     this.getAllUsers();
@@ -33,9 +34,13 @@ export class HomeComponent implements OnInit {
     );
   }
 
+
+
   getAllProjects() {
     this.projectService.get().subscribe(
       (response) => {
+        console.log(response);
+        this.lengthProjectDeployment =response.filter((huyne: any) => huyne.status === "deployment").length;
         this.listAllProjects = response;
         const selectedValue = this.listAllProjects[0]._id;
         this.getSelectedProjects(selectedValue);
@@ -46,23 +51,20 @@ export class HomeComponent implements OnInit {
     );
   }
 
-
   getSelectedProjects(selectedValue: any) {
     this.projectService.getSelect(selectedValue).subscribe(
       (response) => {
-        this.listAllProjects = response;
+        this.listIDProject = response;
       },
       (error) => {
         console.log(error);
       }
     );
   }
-  
-
 
   onProjectChange(event: any) {
     const selectedValue = event.target.value;
-    console.log(selectedValue)
+    console.log(selectedValue);
     this.getSelectedProjects(selectedValue);
   }
 }
