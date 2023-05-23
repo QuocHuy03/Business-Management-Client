@@ -53,7 +53,7 @@
               >
                 Số Lượng Thành Viên Dự Án
                 <span
-                  class="badge bg-primary rounded-pill text-white"
+                  class="badge bg-primary  text-white"
                   *ngIf="
                     listIDProject && listIDProject.totalUsers !== undefined
                   "
@@ -66,7 +66,7 @@
               >
                 Tổng Chi Phí Của Dự Án
                 <span
-                  class="badge bg-primary rounded-pill text-white"
+                  class="badge bg-primary  text-white"
                   *ngIf="listIDProject && listIDProject.projectTasks"
                 >
                   {{ listIDProject.projectTasks.idProject.budget | currency }}
@@ -77,7 +77,7 @@
                 *ngIf="listIDProject && listIDProject.processingTasks"
               >
                 Các Task Đang Xử Lý Dự Án
-                <span class="badge bg-primary rounded-pill text-white">{{
+                <span class="badge bg-primary  text-white">{{
                   listIDProject.processingTasks
                 }}</span>
               </li>
@@ -88,7 +88,7 @@
               >
                 Các Task Đã Hoàn Thành Dự Án
                 <span
-                  class="badge bg-primary rounded-pill text-white"
+                  class="badge bg-primary  text-white"
                   *ngIf="
                     listIDProject && listIDProject.completeTasks !== undefined
                   "
@@ -425,7 +425,7 @@
                 class="list-group-item d-flex justify-content-between align-items-center"
               >
                 Tổng Số Lượng Thành Viên
-                <span class="badge bg-primary rounded-pill text-white">
+                <span class="badge bg-primary text-white">
                   {{ totalAllUsers }}
                 </span>
               </li>
@@ -433,7 +433,7 @@
                 class="list-group-item d-flex justify-content-between align-items-center"
               >
                 Tổng Chi Phí Của Dự Án
-                <span class="badge bg-primary rounded-pill text-white">
+                <span class="badge bg-primary  text-white">
                   {{ totalReducerProject | currency }}
                 </span>
               </li>
@@ -441,7 +441,7 @@
                 class="list-group-item d-flex justify-content-between align-items-center"
               >
                 Các Task Đang Xử Lý
-                <span class="badge bg-primary rounded-pill text-white">{{
+                <span class="badge bg-primary  text-white">{{
                   lengthTaskProcessing
                 }}</span>
               </li>
@@ -449,7 +449,7 @@
                 class="list-group-item d-flex justify-content-between align-items-center"
               >
                 Các Dự Án Đang Triển Khai
-                <span class="badge bg-primary rounded-pill text-white">{{
+                <span class="badge bg-primary  text-white">{{
                   lengthProjectDeployment
                 }}</span>
               </li>

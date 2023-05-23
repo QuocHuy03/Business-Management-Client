@@ -22,4 +22,14 @@ export class ApiAccessTokenService {
     const headers = this.createAuthHeader();
     return this.http.get(`${this.baseURL}/verifyAccessToken`, { headers });
   }
+
+  getUserInfo(): Observable<any> {
+    const headers = this.createAuthHeader();
+    return this.http.get(`${this.baseURL}/user`, { headers });
+  }
+
+  updateUserInfo(userInfo: any): Observable<any> {
+    const headers = this.createAuthHeader();
+    return this.http.put(`${this.baseURL}/updateUser`, userInfo, { headers });
+  }
 }
