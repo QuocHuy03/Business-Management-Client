@@ -32,4 +32,8 @@ export class ApiAccessTokenService {
     const headers = this.createAuthHeader();
     return this.http.put(`${this.baseURL}/updateUser`, userInfo, { headers });
   }
+
+  refreshToken(refreshToken: string): Observable<any> {
+    return this.http.post<any>(`${this.baseURL}/refreshToken`, { refreshToken });
+  }
 }

@@ -55,6 +55,10 @@ export class HeaderComponent {
     this.apiAccessTokenService.updateUserInfo(updatedUserInfo).subscribe(
       (response) => {
         this.toastr.success(`${response.message}`, 'Success');
+        this.username = updatedUserInfo.username;
+        this.email = updatedUserInfo.email;
+        this.area = updatedUserInfo.area;
+        this.level = updatedUserInfo.level;
         console.log('User info updated successfully');
       },
       (error) => {
@@ -62,4 +66,6 @@ export class HeaderComponent {
       }
     );
   }
+
+
 }
