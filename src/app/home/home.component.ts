@@ -9,6 +9,9 @@ import { TaskService } from '../services/task.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
+
+  loading: boolean = true;
+
   totalAllUsers: any[] = [];
   listUsers: any;
   listAllProjects: any;
@@ -61,10 +64,12 @@ export class HomeComponent implements OnInit {
           South: this.filterMembersSouth.length,
           North: this.filterMembersNorth.length,
         };
+        this.loading = false;
         // console.log(areaCounts)
       },
       (error) => {
         console.log(error);
+        this.loading = false;
       }
     );
   }
@@ -88,6 +93,7 @@ export class HomeComponent implements OnInit {
         (user: any) => user.status === 'Office'
       ).length;
     }
+    this.loading = false;
     return 0;
   }
 
@@ -98,9 +104,11 @@ export class HomeComponent implements OnInit {
         this.lengthTaskProcessing = response.filter(
           (huyne: any) => huyne.status === 'processing'
         ).length;
+        this.loading = false;
       },
       (error) => {
         console.log(error);
+        this.loading = false;
       }
     );
   }
@@ -120,9 +128,11 @@ export class HomeComponent implements OnInit {
         this.listAllProjects = response;
         const selectedValue = this.listAllProjects[0]._id;
         this.getSelectedProjects(selectedValue);
+        this.loading = false;
       },
       (error) => {
         console.log(error);
+        this.loading = false;
       }
     );
   }
@@ -131,9 +141,11 @@ export class HomeComponent implements OnInit {
     this.projectService.getSelect(selectedValue).subscribe(
       (response) => {
         this.listIDProject = response;
+        this.loading = false;
       },
       (error) => {
         console.log(error);
+        this.loading = false;
       }
     );
   }
