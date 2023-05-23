@@ -150,6 +150,17 @@
                               placeholder="100,000,000"
                             />
                           </div>
+                          <div class="form-group">
+                            <label for="expense">Expense</label>
+                            <input
+                              type="number"
+                              class="form-control"
+                              id="expense"
+                              [(ngModel)]="huydev.expense"
+                              name="expense"
+                              placeholder="200,000"
+                            />
+                          </div>
                         </form>
                       </div>
 
@@ -263,6 +274,17 @@
                     [(ngModel)]="budget"
                     name="budget"
                     placeholder="100,000,000"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="expense">Expense</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="expense"
+                    [(ngModel)]="expense"
+                    name="expense"
+                    placeholder="200,000"
                   />
                 </div>
               </form>

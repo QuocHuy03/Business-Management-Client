@@ -66,7 +66,7 @@
             <li
               class="list-group-item d-flex justify-content-between align-items-center"
               *ngIf="
-                listIDProject && listIDProject.processingTasks !== undefined
+                listIDProject && listIDProject.processingTasks
               "
             >
               Các Task Đang Xử Lý Dự Án
@@ -78,7 +78,7 @@
             <li
               class="list-group-item d-flex justify-content-between align-items-center"
               *ngIf="
-                listIDProject && listIDProject.processingTasks !== undefined
+                listIDProject && listIDProject.processingTasks
               "
             >
               Các Task Đã Hoàn Thành Dự Án
@@ -134,17 +134,27 @@
               <table class="table caption-top">
                 <tbody>
                   <tr>
-                    <td>Chi phí dự án</td>
-                    <td>$2,113,507</td>
+                    <td>Chi Phí Dự Án</td>
+                    <td *ngIf="listIDProject && listIDProject.projectTasks !== undefined
+                  ">
+                      {{
+                        listIDProject.projectTasks.idProject.budget | currency
+                      }}
+                    </td>
                   </tr>
                   <tr>
-                    <td>Hiện tại đã chi</td>
-                    <td>$93,507</td>
+                    <td>Hiện Tại Đã Chi</td>
+                    <td *ngIf="listIDProject && listIDProject.projectTasks !== undefined"> {{
+                        listIDProject.projectTasks.idProject.expense | currency
+                      }}</td>
                   </tr>
                   <tr>
-                    <td>Còn lại</td>
-                    <td>$52,788</td>
+                    <td>Còn Lại</td>
+                    <td *ngIf="listIDProject && listIDProject.projectTasks && listIDProject.projectTasks.idProject.budget !== undefined && listIDProject.projectTasks.idProject.expense !== undefined">
+                      {{ (listIDProject.projectTasks.idProject.budget - listIDProject.projectTasks.idProject.expense) | currency }}
+                    </td>
                   </tr>
+                  
                 </tbody>
               </table>
             </div>
@@ -161,26 +171,12 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">East</th>
-                    <td>5</td>
-                    <td>4</td>
+                <tr *ngFor="let area of areaCounts | keyvalue">
+                    <th scope="row">{{ area.key }}</th>
+                    <td>{{ area.value }}</td>
+                    <td>{{ getOnLeaveEmployees(area.key) }}</td>
                   </tr>
-                  <tr>
-                    <th scope="row">West</th>
-                    <td>3</td>
-                    <td>4</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">South</th>
-                    <td>5</td>
-                    <td>4</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">North</th>
-                    <td>5</td>
-                    <td>4</td>
-                  </tr>
+             
                 </tbody>
               </table>
             </div>
@@ -213,17 +209,22 @@
                   <div>
                     <table class="table-area">
                       <tbody>
-                        <ng-container *ngIf="filterMembersEast && filterMembersEast.length > 0; else noData">
-                            <tr *ngFor="let huydev of filterMembersEast">
-                                <th class="bg-info" scope="row">#</th>
-                                <td>{{huydev.username}}</td>
-                            </tr>
-                          </ng-container>
-                          <ng-template #noData>
-                            <tr class="text-center">
-                              <td colspan="1">Empty data ...</td>
-                            </tr>
-                          </ng-template>
+                        <ng-container
+                          *ngIf="
+                            filterMembersEast && filterMembersEast.length > 0;
+                            else noData
+                          "
+                        >
+                          <tr *ngFor="let huydev of filterMembersEast">
+                            <th class="bg-info" scope="row">#</th>
+                            <td>{{ huydev.username }}</td>
+                          </tr>
+                        </ng-container>
+                        <ng-template #noData>
+                          <tr class="text-center">
+                            <td colspan="1">Empty data ...</td>
+                          </tr>
+                        </ng-template>
                       </tbody>
                     </table>
                   </div>
@@ -250,17 +251,22 @@
                   <div>
                     <table class="table-area">
                       <tbody>
-                        <ng-container *ngIf="filterMembersWest && filterMembersWest.length > 0; else noData">
-                            <tr *ngFor="let huydev of filterMembersWest">
-                                <th class="bg-info" scope="row">#</th>
-                                <td>{{huydev.username}}</td>
-                            </tr>
-                          </ng-container>
-                          <ng-template #noData>
-                            <tr class="text-center">
-                              <td colspan="1">Empty data ...</td>
-                            </tr>
-                          </ng-template>
+                        <ng-container
+                          *ngIf="
+                            filterMembersWest && filterMembersWest.length > 0;
+                            else noData
+                          "
+                        >
+                          <tr *ngFor="let huydev of filterMembersWest">
+                            <th class="bg-info" scope="row">#</th>
+                            <td>{{ huydev.username }}</td>
+                          </tr>
+                        </ng-container>
+                        <ng-template #noData>
+                          <tr class="text-center">
+                            <td colspan="1">Empty data ...</td>
+                          </tr>
+                        </ng-template>
                       </tbody>
                     </table>
                   </div>
@@ -287,17 +293,22 @@
                   <div>
                     <table class="table-area">
                       <tbody>
-                        <ng-container *ngIf="filterMembersSouth && filterMembersSouth.length > 0; else noData">
-                            <tr *ngFor="let huydev of filterMembersSouth">
-                                <th class="bg-info" scope="row">#</th>
-                                <td>{{huydev.username}}</td>
-                            </tr>
-                          </ng-container>
-                          <ng-template #noData>
-                            <tr class="text-center">
-                              <td colspan="1">Empty data ...</td>
-                            </tr>
-                          </ng-template>
+                        <ng-container
+                          *ngIf="
+                            filterMembersSouth && filterMembersSouth.length > 0;
+                            else noData
+                          "
+                        >
+                          <tr *ngFor="let huydev of filterMembersSouth">
+                            <th class="bg-info" scope="row">#</th>
+                            <td>{{ huydev.username }}</td>
+                          </tr>
+                        </ng-container>
+                        <ng-template #noData>
+                          <tr class="text-center">
+                            <td colspan="1">Empty data ...</td>
+                          </tr>
+                        </ng-template>
                       </tbody>
                     </table>
                   </div>
@@ -324,17 +335,22 @@
                   <div>
                     <table class="table-area">
                       <tbody>
-                        <ng-container *ngIf="filterMembersNorth && filterMembersNorth.length > 0; else noData">
-                            <tr *ngFor="let huydev of filterMembersNorth">
-                                <th class="bg-info" scope="row">#</th>
-                                <td>{{huydev.username}}</td>
-                            </tr>
-                          </ng-container>
-                          <ng-template #noData>
-                            <tr class="text-center">
-                              <td colspan="1">Empty data ...</td>
-                            </tr>
-                          </ng-template>
+                        <ng-container
+                          *ngIf="
+                            filterMembersNorth && filterMembersNorth.length > 0;
+                            else noData
+                          "
+                        >
+                          <tr *ngFor="let huydev of filterMembersNorth">
+                            <th class="bg-info" scope="row">#</th>
+                            <td>{{ huydev.username }}</td>
+                          </tr>
+                        </ng-container>
+                        <ng-template #noData>
+                          <tr class="text-center">
+                            <td colspan="1">Empty data ...</td>
+                          </tr>
+                        </ng-template>
                       </tbody>
                     </table>
                   </div>

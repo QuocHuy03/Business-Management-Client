@@ -13,6 +13,7 @@ export class ProjectComponent implements OnInit {
   teamSize: string = '';
   dateOfStart: string = '';
   budget: string = '';
+  expense: string = '';
   status: string = '';
 
   constructor(
@@ -31,6 +32,7 @@ export class ProjectComponent implements OnInit {
         teamSize: this.teamSize,
         dateOfStart: this.dateOfStart,
         budget: this.budget,
+        expense: this.expense,
         status: this.status,
       };
       this.projectService.add(data).subscribe(
@@ -49,6 +51,7 @@ export class ProjectComponent implements OnInit {
         teamSize: huydev.teamSize,
         dateOfStart: huydev.dateOfStart,
         budget: huydev.budget,
+        expense: huydev.expense,
         status: huydev.status,
       };
       this.projectService.update(huydev._id, data).subscribe(
