@@ -88,24 +88,7 @@ export class LoginComponent {
       );
   }
 
-   // refresh token 
-   refreshToken() {
-    const refreshToken = localStorage.getItem('refreshToken');
-  
-    if (refreshToken) {
-      this.apiAccessTokenService.refreshToken(refreshToken).subscribe(
-        (response) => {
-          const accessToken = response.accessToken;
-          // Cập nhật access token mới trong localStorage
-          localStorage.setItem('accessToken', accessToken);
-          console.log('Access token refreshed');
-        },
-        (error) => {
-          console.log('Failed to refresh access token', error);
-        }
-      );
-    }
-  }
+ 
    
   
 }
