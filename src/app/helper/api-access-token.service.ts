@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class ApiAccessTokenService {
-  private baseURL = environment;
+  private baseURL = environment.apiUrl;
   constructor(private http: HttpClient) {}
 
   getAccessToken(): string | null {
@@ -35,6 +35,8 @@ export class ApiAccessTokenService {
   }
 
   refreshToken(refreshToken: string): Observable<any> {
-    return this.http.post<any>(`${this.baseURL}/refreshToken`, { refreshToken });
+    return this.http.post<any>(`${this.baseURL}/refreshToken`, {
+      refreshToken,
+    });
   }
 }

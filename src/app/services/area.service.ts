@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class AreaService {
-  private baseURL = environment;
+  private baseURL = environment.apiUrl;
   constructor(
     private http: HttpClient,
     private apiAccessTokenService: ApiAccessTokenService

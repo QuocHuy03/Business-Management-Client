@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class AuthService {
-  private baseURL = environment;
+  private baseURL = environment.apiUrl;
   private levelSubject: BehaviorSubject<string | null> = new BehaviorSubject<
     string | null
   >(null);

@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 import { ApiAccessTokenService } from '../helper/api-access-token.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TaskService {
-  private baseURL = 'http://localhost:2000/api';
+  private baseURL = environment.apiUrl;
   constructor(
     private http: HttpClient,
     private apiAccessTokenService: ApiAccessTokenService
