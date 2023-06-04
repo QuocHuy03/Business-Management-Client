@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiAccessTokenService {
-  private baseURL = 'http://localhost:3000/api';
+  private baseURL = environment;
   constructor(private http: HttpClient) {}
 
   getAccessToken(): string | null {

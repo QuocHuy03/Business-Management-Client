@@ -1,12 +1,13 @@
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private baseURL = 'http://localhost:3000/api';
+  private baseURL = environment;
   private levelSubject: BehaviorSubject<string | null> = new BehaviorSubject<
     string | null
   >(null);

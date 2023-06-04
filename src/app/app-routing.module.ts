@@ -7,6 +7,8 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { AuthGuardService } from './helper/auth-guard.service';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { UserComponent } from './user/user.component';
+import { AreaComponent } from './area/area.component';
 
 const routes: Routes = [
   {
@@ -22,6 +24,16 @@ const routes: Routes = [
   {
     path: 'task',
     component: TaskComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'users',
+    component: UserComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'areas',
+    component: AreaComponent,
     canActivate: [AuthGuardService],
   },
   {

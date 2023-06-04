@@ -1,36 +1,33 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { ApiAccessTokenService } from '../helper/api-access-token.service';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AreaService {
+export class UserService {
   private baseURL = environment;
   constructor(
     private http: HttpClient,
     private apiAccessTokenService: ApiAccessTokenService
   ) {}
-  get(): Observable<any> {
-    return this.http.get(`${this.baseURL}/getAreas`);
-  }
 
-  add(data: any): Observable<any> {
+  get(): Observable<any> {
     const headers = this.apiAccessTokenService.createAuthHeader();
-    return this.http.post(`${this.baseURL}/addArea`, data, { headers });
+    return this.http.get(`${this.baseURL}/getUsers`, { headers });
   }
 
   update(id: any, data: any): Observable<any> {
     const headers = this.apiAccessTokenService.createAuthHeader();
-    return this.http.put(`${this.baseURL}/updateArea/${id}`, data, {
+    return this.http.put(`${this.baseURL}/updateUser/${id}`, data, {
       headers,
     });
   }
 
   delete(id: any): Observable<any> {
     const headers = this.apiAccessTokenService.createAuthHeader();
-    return this.http.delete(`${this.baseURL}/deleteArea/${id}`, { headers });
+    return this.http.delete(`${this.baseURL}/deleteUser/${id}`, { headers });
   }
 }

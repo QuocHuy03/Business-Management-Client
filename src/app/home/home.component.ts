@@ -9,9 +9,9 @@ import { TaskService } from '../services/task.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-
   loading: boolean = true;
 
+  username: string;
   totalAllUsers: any[] = [];
   listUsers: any;
   listAllProjects: any;
@@ -31,7 +31,9 @@ export class HomeComponent implements OnInit {
     private authService: AuthService,
     private projectService: ProjectService,
     private taskService: TaskService
-  ) {}
+  ) {
+    this.username = localStorage.getItem('username') || '';
+  }
 
   ngOnInit(): void {
     this.getAllUsers();

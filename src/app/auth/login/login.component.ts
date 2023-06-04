@@ -62,6 +62,7 @@ export class LoginComponent {
             return this.apiAccessTokenService.get().pipe(
               tap((response) => {
                 localStorage.setItem('level', response.level);
+                localStorage.setItem('username', response.username);
                 this.authService.setLevel(response.level);
                 if (response.level === 'employee') {
                   this.router.navigateByUrl('/task');

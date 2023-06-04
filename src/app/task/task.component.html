@@ -40,7 +40,7 @@
             <th>ACTIONS</th>
           </tr>
         </thead>
-        <ng-container *ngIf="tasks && tasks.length > 0; else noData">
+        <tbody>
           <tr *ngFor="let huydev of tasks">
             <td class="text-center">{{ huydev._id }}</td>
             <td class="text-center">{{ huydev.taskName }}</td>
@@ -214,12 +214,8 @@
               </div>
             </td>
           </tr>
-        </ng-container>
-        <ng-template #noData>
-          <tr class="text-center">
-            <td colspan="7">Empty data ...</td>
-          </tr>
-        </ng-template>
+        </tbody>
+
       </table>
       <!-- Add Modal -->
       <div
@@ -366,7 +362,10 @@
         </div>
       </div>
 
+      
       <!-- end -->
     </main>
   </div>
 </div>
+
+

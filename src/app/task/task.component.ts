@@ -79,7 +79,11 @@ export class TaskComponent implements OnInit {
       };
       this.taskService.add(data).subscribe(
         (response) => {
-          this.toastr.success(`${response.message}`, 'Success');
+          if (response === true) {
+            this.toastr.success(`${response.message}`, 'Success');
+          } else {
+            this.toastr.error(`${response.message}`, 'Error');
+          }
           this.getTask();
           this.clearForm();
         },
@@ -98,7 +102,11 @@ export class TaskComponent implements OnInit {
       };
       this.taskService.update(huydev._id, data).subscribe(
         (response) => {
-          this.toastr.success(`${response.message}`, 'Success');
+          if (response === true) {
+            this.toastr.success(`${response.message}`, 'Success');
+          } else {
+            this.toastr.error(`${response.message}`, 'Error');
+          }
           this.getTask();
         },
         (error) => {
@@ -111,7 +119,11 @@ export class TaskComponent implements OnInit {
   deleteTask(id: any) {
     this.taskService.delete(id).subscribe(
       (response) => {
-        this.toastr.success(`${response.message}`, 'Success');
+        if (response.status === true) {
+          this.toastr.success(`${response.message}`, 'Success');
+        } else {
+          this.toastr.error(`${response.message}`, 'Error');
+        }
         this.getTask();
       },
       (error) => {
