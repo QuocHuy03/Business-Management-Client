@@ -41,7 +41,7 @@
           </tr>
         </thead>
         <tbody>
-          <ng-container *ngIf="users && users.length > 0; else noData">
+          <ng-container *ngIf="tasks && tasks.length > 0; else noData">
             <tr *ngFor="let huydev of tasks">
               <td class="text-center">{{ huydev._id }}</td>
               <td class="text-center">{{ huydev.taskName }}</td>
