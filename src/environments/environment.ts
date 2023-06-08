@@ -1,5 +1,5 @@
 export const environment = {
-  apiUrl: 'http://localhost:2000/api',
+  apiUrl: 'https://business-management-server.onrender.com/api',
   pagination: {
     page: 1,
     limit: 5,
