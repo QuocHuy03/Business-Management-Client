@@ -41,182 +41,213 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let huydev of tasks">
-            <td class="text-center">{{ huydev._id }}</td>
-            <td class="text-center">{{ huydev.taskName }}</td>
-            <td class="text-center">{{ huydev.description }}</td>
-            <td class="text-center">{{ huydev.idProject.nameProject }}</td>
-            <td class="text-center">{{ huydev.priority }}</td>
-            <td class="text-center">{{ huydev.assignedTo.username }}</td>
-            <td class="text-center" style="text-transform: capitalize">
-              {{ huydev.status }}
-            </td>
-            <td class="text-center">
-              <button
-                class="btn btn-info mr-2"
-                data-toggle="modal"
-                [attr.data-target]="'#editModal_' + huydev._id"
-              >
-                <i class="fas fa-edit"></i>
-                <span> Edit</span>
-              </button>
+          <ng-container *ngIf="users && users.length > 0; else noData">
+            <tr *ngFor="let huydev of tasks">
+              <td class="text-center">{{ huydev._id }}</td>
+              <td class="text-center">{{ huydev.taskName }}</td>
+              <td class="text-center">{{ huydev.description }}</td>
+              <td class="text-center">{{ huydev.idProject.nameProject }}</td>
+              <td class="text-center">{{ huydev.priority }}</td>
+              <td class="text-center">{{ huydev.assignedTo.username }}</td>
+              <td class="text-center" style="text-transform: capitalize">
+                {{ huydev.status }}
+              </td>
+              <td class="text-center">
+                <button
+                  class="btn btn-info mr-2"
+                  data-toggle="modal"
+                  [attr.data-target]="'#editModal_' + huydev._id"
+                >
+                  <i class="fas fa-edit"></i>
+                  <span> Edit</span>
+                </button>
 
-              <button class="btn btn-danger" (click)="deleteTask(huydev._id)">
-                <i class="fas fa-trash"></i>
-                <span> Delete</span>
-              </button>
+                <button class="btn btn-danger" (click)="deleteTask(huydev._id)">
+                  <i class="fas fa-trash"></i>
+                  <span> Delete</span>
+                </button>
 
-              <!-- Edit Modal -->
-              <div
-                class="modal fade text-left"
-                [id]="'editModal_' + huydev._id"
-                tabindex="-1"
-                role="dialog"
-                aria-labelledby="editModalLabel"
-                aria-hidden="true"
-              >
-                <div class="modal-dialog modal-lg" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="editModalLabel">
-                        Edit Task [ {{ huydev.taskName }} ]
-                      </h5>
-                      <button
-                        type="button"
-                        class="close"
-                        data-dismiss="modal"
-                        aria-label="Close"
-                      >
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      <form>
-                        <div class="form-group">
-                          <label for="taskName">Task Name</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            id="taskName"
-                            [(ngModel)]="huydev.taskName"
-                            name="taskName"
-                            placeholder="Tên Nhiệm Vụ"
-                          />
-                        </div>
-                        <div class="form-group">
-                          <label for="description">Description</label>
-                          <textarea
-                            class="form-control"
-                            id="exampleFormControlTextarea1"
-                            rows="3"
-                            [(ngModel)]="huydev.description"
-                            name="description"
-                            placeholder="Nhập Mô Tả Nhiệm Vụ"
-                          ></textarea>
-                        </div>
+                <!-- Edit Modal -->
+                <div
+                  class="modal fade text-left"
+                  [id]="'editModal_' + huydev._id"
+                  tabindex="-1"
+                  role="dialog"
+                  aria-labelledby="editModalLabel"
+                  aria-hidden="true"
+                >
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="editModalLabel">
+                          Edit Task [ {{ huydev.taskName }} ]
+                        </h5>
+                        <button
+                          type="button"
+                          class="close"
+                          data-dismiss="modal"
+                          aria-label="Close"
+                        >
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <form>
+                          <div class="form-group">
+                            <label for="taskName">Task Name</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="taskName"
+                              [(ngModel)]="huydev.taskName"
+                              name="taskName"
+                              placeholder="Tên Nhiệm Vụ"
+                            />
+                          </div>
+                          <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea
+                              class="form-control"
+                              id="exampleFormControlTextarea1"
+                              rows="3"
+                              [(ngModel)]="huydev.description"
+                              name="description"
+                              placeholder="Nhập Mô Tả Nhiệm Vụ"
+                            ></textarea>
+                          </div>
 
-                        <div class="row">
-                          <div class="col-sm-6">
-                            <div class="form-group">
-                              <label for="idProject">Project</label>
-                              <select
-                                class="form-control"
-                                id="idProject"
-                                [(ngModel)]="huydev.idProject._id"
-                                name="idProject"
-                              >
-                                <option value="">Chọn Project</option>
-                                <option
-                                  *ngFor="let project of projects"
-                                  [value]="project._id"
+                          <div class="row">
+                            <div class="col-sm-6">
+                              <div class="form-group">
+                                <label for="idProject">Project</label>
+                                <select
+                                  class="form-control"
+                                  id="idProject"
+                                  [(ngModel)]="huydev.idProject._id"
+                                  name="idProject"
                                 >
-                                  {{ project.nameProject }}
-                                </option>
-                              </select>
+                                  <option value="">Chọn Project</option>
+                                  <option
+                                    *ngFor="let project of projects"
+                                    [value]="project._id"
+                                  >
+                                    {{ project.nameProject }}
+                                  </option>
+                                </select>
+                              </div>
                             </div>
-                          </div>
-                          <div class="col-sm-6">
-                            <div class="form-group">
-                              <label for="priority">Priority</label>
-                              <select
-                                class="form-control"
-                                id="priority"
-                                [(ngModel)]="huydev.priority"
-                                name="priority"
-                              >
-                                <option value="">Chọn Priority</option>
-                                <option value="High">High</option>
-                                <option value="Medium">Medium</option>
-                                <option value="Low">Low</option>
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="row">
-                          <div class="col-sm-6">
-                            <div class="form-group">
-                              <label for="assignedTo">Assigned To</label>
-                              <select
-                                class="form-control"
-                                id="assignedTo"
-                                [(ngModel)]="huydev.assignedTo._id"
-                                name="assignedTo"
-                              >
-                                <option value="">Chọn Assigned To</option>
-                                <option
-                                  *ngFor="let quochuy of users"
-                                  [value]="quochuy._id"
+                            <div class="col-sm-6">
+                              <div class="form-group">
+                                <label for="priority">Priority</label>
+                                <select
+                                  class="form-control"
+                                  id="priority"
+                                  [(ngModel)]="huydev.priority"
+                                  name="priority"
                                 >
-                                  {{ quochuy.username }}
-                                </option>
-                              </select>
+                                  <option value="">Chọn Priority</option>
+                                  <option value="High">High</option>
+                                  <option value="Medium">Medium</option>
+                                  <option value="Low">Low</option>
+                                </select>
+                              </div>
                             </div>
                           </div>
-                          <div class="col-sm-6">
-                            <div class="form-group">
-                              <label for="status">Status</label>
-                              <select
-                                class="form-control"
-                                id="status"
-                                [(ngModel)]="huydev.status"
-                                name="status"
-                              >
-                                <option value="">Chọn Status</option>
-                                <option value="processing">Processing</option>
-                                <option value="complete">Complete</option>
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-                      </form>
-                    </div>
 
-                    <div class="modal-footer">
-                      <button
-                        type="button"
-                        class="btn btn-secondary"
-                        data-dismiss="modal"
-                      >
-                        Close
-                      </button>
-                      <button
-                        type="button"
-                        class="btn btn-primary"
-                        (click)="saveTask(false, true, huydev)"
-                        data-dismiss="modal"
-                      >
-                        Save
-                      </button>
+                          <div class="row">
+                            <div class="col-sm-6">
+                              <div class="form-group">
+                                <label for="assignedTo">Assigned To</label>
+                                <select
+                                  class="form-control"
+                                  id="assignedTo"
+                                  [(ngModel)]="huydev.assignedTo._id"
+                                  name="assignedTo"
+                                >
+                                  <option value="">Chọn Assigned To</option>
+                                  <option
+                                    *ngFor="let quochuy of users"
+                                    [value]="quochuy._id"
+                                  >
+                                    {{ quochuy.username }}
+                                  </option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="col-sm-6">
+                              <div class="form-group">
+                                <label for="status">Status</label>
+                                <select
+                                  class="form-control"
+                                  id="status"
+                                  [(ngModel)]="huydev.status"
+                                  name="status"
+                                >
+                                  <option value="">Chọn Status</option>
+                                  <option value="processing">Processing</option>
+                                  <option value="complete">Complete</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+
+                      <div class="modal-footer">
+                        <button
+                          type="button"
+                          class="btn btn-secondary"
+                          data-dismiss="modal"
+                        >
+                          Close
+                        </button>
+                        <button
+                          type="button"
+                          class="btn btn-primary"
+                          (click)="saveTask(false, true, huydev)"
+                          data-dismiss="modal"
+                        >
+                          Save
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </td>
-          </tr>
+              </td>
+            </tr>
+          </ng-container>
+          <ng-template #noData>
+            <tr class="text-center">
+              <td colspan="8">Empty data ...</td>
+            </tr>
+          </ng-template>
         </tbody>
-
       </table>
+      <!-- pagination -->
+      <nav class="text-center">
+        <ul class="pagination">
+          <li class="page-item" [ngClass]="{ disabled: currentPage === 1 }">
+            <a class="page-link" (click)="getTask(currentPage - 1)">Previous</a>
+          </li>
+
+          <li class="page-item" *ngFor="let page of totalPagesArray">
+            <a
+              class="page-link"
+              (click)="getTask(page)"
+              [class.active]="currentPage === page"
+              >{{ page }}</a
+            >
+          </li>
+
+          <li
+            class="page-item"
+            [ngClass]="{ disabled: currentPage === totalPages }"
+          >
+            <a class="page-link" (click)="getTask(currentPage + 1)">Next</a>
+          </li>
+        </ul>
+      </nav>
+
       <!-- Add Modal -->
       <div
         class="modal fade"
@@ -362,10 +393,7 @@
         </div>
       </div>
 
-      
       <!-- end -->
     </main>
   </div>
 </div>
-
-

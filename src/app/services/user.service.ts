@@ -19,6 +19,15 @@ export class UserService {
     return this.http.get(`${this.baseURL}/getUsers`, { headers });
   }
 
+  getUserPage(page: number, limit: number): Observable<any> {
+    const headers = this.apiAccessTokenService.createAuthHeader();
+    return this.http.get(
+      `${this.baseURL}/getUsers?page=${page}&limit=${limit}`,
+      { headers }
+    );
+  }
+
+
   update(id: any, data: any): Observable<any> {
     const headers = this.apiAccessTokenService.createAuthHeader();
     return this.http.put(`${this.baseURL}/updateUser/${id}`, data, {

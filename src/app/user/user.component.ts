@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-user',
@@ -9,6 +10,12 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class UserComponent implements OnInit {
   users: any;
+
+  currentPage: number = 1;
+  totalPages: number = 0;
+  totalItems: number = 0;
+  totalPagesArray: any;
+
   constructor(
     private userService: UserService,
     private toastr: ToastrService
@@ -18,10 +25,18 @@ export class UserComponent implements OnInit {
     this.getUsers();
   }
 
-  getUsers() {
-    this.userService.get().subscribe(
+  getUsers(page: number = environment.pagination.page, limit: number = environment.pagination.limit) {
+    this.userService.getUserPage(page,limit).subscribe(
       (response) => {
-        this.users = response;
+        this.users = response.users;
+        this.currentPage = response.currentPage;
+        this.totalPages = response.totalPages;
+        this.totalItems = response.totalItems;
+
+        this.totalPagesArray = Array.from(
+          { length: this.totalPages },
+          (_, index) => index + 1
+        );
       },
       (error) => {
         console.log(error);

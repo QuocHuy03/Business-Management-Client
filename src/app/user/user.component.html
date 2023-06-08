@@ -40,9 +40,13 @@
               <td class="text-center">{{ huydev.email }}</td>
               <td class="text-center">{{ huydev.level }}</td>
               <td class="text-center">{{ huydev.area.nameArea }}</td>
-              <td class="text-center">{{ huydev.createdAt | date:'dd/MM/yyyy HH:mm:ss' }}</td>
+              <td class="text-center">
+                {{ huydev.createdAt | date : "dd/MM/yyyy HH:mm:ss" }}
+              </td>
 
-              <td class="text-center" style="text-transform: capitalize;">{{ huydev.status }}</td>
+              <td class="text-center" style="text-transform: capitalize">
+                {{ huydev.status }}
+              </td>
               <td class="text-center">
                 <button
                   class="btn btn-info mr-2"
@@ -79,35 +83,32 @@
                       </div>
                       <div class="modal-body">
                         <form>
-                    
-                            <div class="form-group">
-                                <label for="level">Level</label>
-                                <select
-                                  class="form-control"
-                                  id="level"
-                                  name="level"
-                                  [(ngModel)]="huydev.level"
-                                >
-                                  <option value="">Chọn Trạng Thái</option>
-                                  <option value="leader">Leader</option>
-                                  <option value="employee">Employee</option>
-                                </select>
-                              </div>
-                              <div class="form-group">
-                                <label for="status">Status</label>
-                                <select
-                                  class="form-control"
-                                  id="status"
-                                  name="status"
-                                  [(ngModel)]="huydev.status"
-                                >
-                                  <option value="">Chọn Trạng Thái</option>
-                                  <option value="Online">Online</option>
-                                  <option value="Office">Office</option>
-                                </select>
-                              </div>
-                   
-                   
+                          <div class="form-group">
+                            <label for="level">Level</label>
+                            <select
+                              class="form-control"
+                              id="level"
+                              name="level"
+                              [(ngModel)]="huydev.level"
+                            >
+                              <option value="">Chọn Trạng Thái</option>
+                              <option value="leader">Leader</option>
+                              <option value="employee">Employee</option>
+                            </select>
+                          </div>
+                          <div class="form-group">
+                            <label for="status">Status</label>
+                            <select
+                              class="form-control"
+                              id="status"
+                              name="status"
+                              [(ngModel)]="huydev.status"
+                            >
+                              <option value="">Chọn Trạng Thái</option>
+                              <option value="Online">Online</option>
+                              <option value="Office">Office</option>
+                            </select>
+                          </div>
                         </form>
                       </div>
 
@@ -136,11 +137,37 @@
           </ng-container>
           <ng-template #noData>
             <tr class="text-center">
-              <td colspan="7">Empty data ...</td>
+              <td colspan="8">Empty data ...</td>
             </tr>
           </ng-template>
         </tbody>
       </table>
+      <!-- pagination -->
+      <nav class="text-center">
+        <ul class="pagination">
+          <li class="page-item" [ngClass]="{ disabled: currentPage === 1 }">
+            <a class="page-link" (click)="getUsers(currentPage - 1)"
+              >Previous</a
+            >
+          </li>
+
+          <li class="page-item" *ngFor="let page of totalPagesArray">
+            <a
+              class="page-link"
+              (click)="getUsers(page)"
+              [class.active]="currentPage === page"
+              >{{ page }}</a
+            >
+          </li>
+
+          <li
+            class="page-item"
+            [ngClass]="{ disabled: currentPage === totalPages }"
+          >
+            <a class="page-link" (click)="getUsers(currentPage + 1)">Next</a>
+          </li>
+        </ul>
+      </nav>
       <!-- end -->
     </main>
   </div>

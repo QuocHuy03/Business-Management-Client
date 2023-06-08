@@ -17,6 +17,13 @@ export class AreaService {
     return this.http.get(`${this.baseURL}/getAreas`);
   }
 
+  getAreaPage(page: number, limit: number): Observable<any> {
+    const headers = this.apiAccessTokenService.createAuthHeader();
+    return this.http.get(
+      `${this.baseURL}/getAreas?page=${page}&limit=${limit}`,
+      { headers }
+    );
+  }
   add(data: any): Observable<any> {
     const headers = this.apiAccessTokenService.createAuthHeader();
     return this.http.post(`${this.baseURL}/addArea`, data, { headers });

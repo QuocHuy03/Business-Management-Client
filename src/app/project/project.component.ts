@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../services/project.service';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-project',
@@ -9,6 +10,12 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ProjectComponent implements OnInit {
   projects: any;
+
+  currentPage: number = 1;
+  totalPages: number = 0;
+  totalItems: number = 0;
+  totalPagesArray: any;
+
   nameProject: string = '';
   teamSize: string = '';
   dateOfStart: string = '';
@@ -56,7 +63,7 @@ export class ProjectComponent implements OnInit {
       };
       this.projectService.update(huydev._id, data).subscribe(
         (response) => {
-         if (response.status === true) {
+          if (response.status === true) {
             this.toastr.success(`${response.message}`, 'Success');
           } else {
             this.toastr.error(`${response.message}`, 'Error');
@@ -73,11 +80,11 @@ export class ProjectComponent implements OnInit {
   deleteProject(id: any) {
     this.projectService.delete(id).subscribe(
       (response) => {
-       if (response === true) {
-            this.toastr.success(`${response.message}`, 'Success');
-          } else {
-            this.toastr.error(`${response.message}`, 'Error');
-          }
+        if (response === true) {
+          this.toastr.success(`${response.message}`, 'Success');
+        } else {
+          this.toastr.error(`${response.message}`, 'Error');
+        }
         this.getProjects();
       },
       (error) => {
@@ -86,10 +93,19 @@ export class ProjectComponent implements OnInit {
     );
   }
 
-  getProjects() {
-    this.projectService.get().subscribe(
+  getProjects(page: number = environment.pagination.page, limit: number = environment.pagination.limit) {
+    this.projectService.getProjectPage(page, limit).subscribe(
       (response) => {
-        this.projects = response;
+        console.log(response);
+        this.projects = response.projects;
+        this.currentPage = response.currentPage;
+        this.totalPages = response.totalPages;
+        this.totalItems = response.totalItems;
+
+        this.totalPagesArray = Array.from(
+          { length: this.totalPages },
+          (_, index) => index + 1
+        );
       },
       (error) => {
         console.log(error);

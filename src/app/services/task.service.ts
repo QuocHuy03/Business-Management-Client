@@ -19,10 +19,19 @@ export class TaskService {
     const headers = this.apiAccessTokenService.createAuthHeader();
     return this.http.post(`${this.baseURL}/addTask`, data, { headers });
   }
-
   get(): Observable<any> {
     const headers = this.apiAccessTokenService.createAuthHeader();
-    return this.http.get(`${this.baseURL}/getTasks`, { headers });
+    return this.http.get(
+      `${this.baseURL}/getTasks`,
+      { headers }
+    );
+  }
+  getTaskPage(page: number, limit: number): Observable<any> {
+    const headers = this.apiAccessTokenService.createAuthHeader();
+    return this.http.get(
+      `${this.baseURL}/getTasks?page=${page}&limit=${limit}`,
+      { headers }
+    );
   }
 
   getID(id: any): Observable<any> {

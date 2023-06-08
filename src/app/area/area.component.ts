@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { AreaService } from '../services/area.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-area',
@@ -9,6 +10,11 @@ import { AreaService } from '../services/area.service';
 })
 export class AreaComponent implements OnInit {
   areas: any;
+  currentPage: number = 1;
+  totalPages: number = 0;
+  totalItems: number = 0;
+  totalPagesArray: any;
+
   nameArea: string = '';
 
   constructor(
@@ -20,10 +26,18 @@ export class AreaComponent implements OnInit {
     this.getAreas();
   }
 
-  getAreas() {
-    this.areaService.get().subscribe(
+  getAreas(page: number = environment.pagination.page, limit: number = environment.pagination.limit) {
+    this.areaService.getAreaPage(page, limit).subscribe(
       (response) => {
-        this.areas = response;
+        this.areas = response.areas;
+        this.currentPage = response.currentPage;
+        this.totalPages = response.totalPages;
+        this.totalItems = response.totalItems;
+
+        this.totalPagesArray = Array.from(
+          { length: this.totalPages },
+          (_, index) => index + 1
+        );
       },
       (error) => {
         console.log(error);

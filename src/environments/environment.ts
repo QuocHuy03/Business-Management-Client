@@ -1,3 +1,8 @@
 export const environment = {
-    apiUrl: 'https://qldn-asm-angular.onrender.com/api',
-  };
+  apiUrl: 'http://localhost:2000/api',
+  pagination: {
+    page: 1,
+    limit: 5,
+  },
+};
+

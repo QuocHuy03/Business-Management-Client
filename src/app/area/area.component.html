@@ -125,11 +125,37 @@
           </ng-container>
           <ng-template #noData>
             <tr class="text-center">
-              <td colspan="7">Empty data ...</td>
+              <td colspan="4">Empty data ...</td>
             </tr>
           </ng-template>
         </tbody>
       </table>
+          <!-- pagination -->
+          <nav class="text-center">
+            <ul class="pagination">
+              <li class="page-item" [ngClass]="{ disabled: currentPage === 1 }">
+                <a class="page-link" (click)="getAreas(currentPage - 1)"
+                  >Previous</a
+                >
+              </li>
+    
+              <li class="page-item" *ngFor="let page of totalPagesArray">
+                <a
+                  class="page-link"
+                  (click)="getAreas(page)"
+                  [class.active]="currentPage === page"
+                  >{{ page }}</a
+                >
+              </li>
+    
+              <li
+                class="page-item"
+                [ngClass]="{ disabled: currentPage === totalPages }"
+              >
+                <a class="page-link" (click)="getAreas(currentPage + 1)">Next</a>
+              </li>
+            </ul>
+          </nav>
       <!-- Add Modal -->
       <div
         class="modal fade"

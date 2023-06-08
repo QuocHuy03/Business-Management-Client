@@ -3,6 +3,7 @@ import { ProjectService } from '../services/project.service';
 import { ToastrService } from 'ngx-toastr';
 import { TaskService } from '../services/task.service';
 import { AuthService } from '../services/auth.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-task',
@@ -13,6 +14,11 @@ export class TaskComponent implements OnInit {
   projects: any;
   tasks: any;
   users: any;
+
+  currentPage: number = 1;
+  totalPages: number = 0;
+  totalItems: number = 0;
+  totalPagesArray: any;
 
   taskName: string = '';
   description: string = '';
@@ -45,10 +51,19 @@ export class TaskComponent implements OnInit {
     );
   }
 
-  getTask() {
-    this.taskService.get().subscribe(
+  getTask(page: number = environment.pagination.page, limit: number = environment.pagination.limit) {
+    this.taskService.getTaskPage(page, limit).subscribe(
       (response) => {
-        this.tasks = response;
+        // console.log(response)
+        this.tasks = response.tasks;
+        this.currentPage = response.currentPage;
+        this.totalPages = response.totalPages;
+        this.totalItems = response.totalItems;
+
+        this.totalPagesArray = Array.from(
+          { length: this.totalPages },
+          (_, index) => index + 1
+        );
       },
       (error) => {
         console.log(error);
@@ -79,7 +94,7 @@ export class TaskComponent implements OnInit {
       };
       this.taskService.add(data).subscribe(
         (response) => {
-          if (response === true) {
+          if (response.status === true) {
             this.toastr.success(`${response.message}`, 'Success');
           } else {
             this.toastr.error(`${response.message}`, 'Error');
@@ -102,7 +117,7 @@ export class TaskComponent implements OnInit {
       };
       this.taskService.update(huydev._id, data).subscribe(
         (response) => {
-          if (response === true) {
+          if (response.status === true) {
             this.toastr.success(`${response.message}`, 'Success');
           } else {
             this.toastr.error(`${response.message}`, 'Error');

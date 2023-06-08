@@ -19,6 +19,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { UserComponent } from './user/user.component';
 import { AreaComponent } from './area/area.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { AreaComponent } from './area/area.component';
     FormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    NgxPaginationModule
   ],
   providers: [AuthService, ProjectService, TaskService],
   bootstrap: [AppComponent],
