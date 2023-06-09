@@ -16,6 +16,8 @@ export class TaskComponent implements OnInit {
   tasks: any;
   users: any;
 
+  level!: string | null;
+
   currentPage: number = 1;
   totalPages: number = 0;
   totalItems: number = 0;
@@ -38,6 +40,7 @@ export class TaskComponent implements OnInit {
 
   ngOnInit(): void {
     const level = localStorage.getItem('level');
+    this.level = level;
     if (level === 'leader') {
       this.getTask();
       this.getProjects();
@@ -63,6 +66,7 @@ export class TaskComponent implements OnInit {
     limit: number = environment.pagination.limit
   ) {
     const level = localStorage.getItem('level');
+    this.level = level;
     if (level === 'leader') {
       this.taskService.getTaskPage(page, limit).subscribe(
         (response) => {
