@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class UserService {
-  private baseURL =  environment.apiUrl;
+  private baseURL = environment.apiUrl;
   constructor(
     private http: HttpClient,
     private apiAccessTokenService: ApiAccessTokenService
@@ -19,6 +19,11 @@ export class UserService {
     return this.http.get(`${this.baseURL}/getUsers`, { headers });
   }
 
+  getUserId(username: string): Observable<any> {
+    const headers = this.apiAccessTokenService.createAuthHeader();
+    return this.http.get(`${this.baseURL}/getUserId/${username}`, { headers });
+  }
+
   getUserPage(page: number, limit: number): Observable<any> {
     const headers = this.apiAccessTokenService.createAuthHeader();
     return this.http.get(
@@ -26,7 +31,6 @@ export class UserService {
       { headers }
     );
   }
-
 
   update(id: any, data: any): Observable<any> {
     const headers = this.apiAccessTokenService.createAuthHeader();
