@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { TaskService } from '../services/task.service';
 import { AuthService } from '../services/auth.service';
 import { environment } from 'src/environments/environment';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-task',
@@ -31,13 +32,19 @@ export class TaskComponent implements OnInit {
     private projectService: ProjectService,
     private taskService: TaskService,
     private toastr: ToastrService,
-    private authService: AuthService
+    private authService: AuthService,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
-    this.getTask();
-    this.getProjects();
-    this.getUsers();
+    const level = localStorage.getItem('level');
+    if (level === 'leader') {
+      this.getTask();
+      this.getProjects();
+      this.getUsers();
+    } else {
+      this.getTask();
+    }
   }
 
   getProjects() {
@@ -51,24 +58,66 @@ export class TaskComponent implements OnInit {
     );
   }
 
-  getTask(page: number = environment.pagination.page, limit: number = environment.pagination.limit) {
-    this.taskService.getTaskPage(page, limit).subscribe(
-      (response) => {
-        // console.log(response)
-        this.tasks = response.tasks;
-        this.currentPage = response.currentPage;
-        this.totalPages = response.totalPages;
-        this.totalItems = response.totalItems;
+  getTask(
+    page: number = environment.pagination.page,
+    limit: number = environment.pagination.limit
+  ) {
+    const level = localStorage.getItem('level');
+    if (level === 'leader') {
+      this.taskService.getTaskPage(page, limit).subscribe(
+        (response) => {
+          this.tasks = response.tasks;
+          this.currentPage = response.currentPage;
+          this.totalPages = response.totalPages;
+          this.totalItems = response.totalItems;
 
-        this.totalPagesArray = Array.from(
-          { length: this.totalPages },
-          (_, index) => index + 1
+          this.totalPagesArray = Array.from(
+            { length: this.totalPages },
+            (_, index) => index + 1
+          );
+
+          // console.log(response)
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    } else {
+      const username = localStorage.getItem('username');
+      if (username) {
+        this.userService.getUserId(username).subscribe(
+          (response) => {
+            // console.log(response)
+            this.taskService
+              .getTaskPageUser(page, limit, response._id)
+              .subscribe(
+                (response) => {
+                  // console.log(response)
+                  this.tasks = response.tasks;
+                  this.currentPage = response.currentPage;
+                  this.totalPages = response.totalPages;
+                  this.totalItems = response.totalItems;
+
+                  this.totalPagesArray = Array.from(
+                    { length: this.totalPages },
+                    (_, index) => index + 1
+                  );
+
+                  // console.log(response)
+                },
+                (error) => {
+                  console.log(error);
+                }
+              );
+          },
+          (error) => {
+            console.log(error);
+          }
         );
-      },
-      (error) => {
-        console.log(error);
+      } else {
+        console.log('username not null !');
       }
-    );
+    }
   }
 
   getUsers() {
