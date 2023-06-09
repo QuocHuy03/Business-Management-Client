@@ -21,15 +21,20 @@ export class TaskService {
   }
   get(): Observable<any> {
     const headers = this.apiAccessTokenService.createAuthHeader();
-    return this.http.get(
-      `${this.baseURL}/getTasks`,
-      { headers }
-    );
+    return this.http.get(`${this.baseURL}/getTasks`, { headers });
   }
   getTaskPage(page: number, limit: number): Observable<any> {
     const headers = this.apiAccessTokenService.createAuthHeader();
     return this.http.get(
       `${this.baseURL}/getTasks?page=${page}&limit=${limit}`,
+      { headers }
+    );
+  }
+
+  getTaskPageUser(page: number, limit: number, _id: string): Observable<any> {
+    const headers = this.apiAccessTokenService.createAuthHeader();
+    return this.http.get(
+      `${this.baseURL}/getTasks?_id=${_id}&page=${page}&limit=${limit}`,
       { headers }
     );
   }
