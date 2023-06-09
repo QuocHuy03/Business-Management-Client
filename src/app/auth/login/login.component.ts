@@ -13,6 +13,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginComponent {
   username: string = '';
   password: string = '';
+  isLoading: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -21,7 +22,6 @@ export class LoginComponent {
     private router: Router
   ) {}
 
-  
   // loginUser() {
   //   const userData = { username: this.username, password: this.password };
   //   this.authService.login(userData).subscribe(
@@ -50,12 +50,14 @@ export class LoginComponent {
   // }
 
   loginUser() {
+    this.isLoading = true;
     const userData = { username: this.username, password: this.password };
     this.authService
       .login(userData)
       .pipe(
         switchMap((response) => {
           if (response.status === true) {
+            this.isLoading = false;
             this.toastr.success(`${response.message}`, 'Success');
             localStorage.setItem('accessToken', response.accessToken);
             localStorage.setItem('refreshToken', response.refreshToken);
@@ -88,8 +90,4 @@ export class LoginComponent {
         }
       );
   }
-
- 
-   
-  
 }
