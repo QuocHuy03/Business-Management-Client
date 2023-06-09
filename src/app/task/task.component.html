@@ -8,7 +8,7 @@
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
       >
         <h1 class="h2">Task</h1>
-        <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-toolbar mb-2 mb-md-0" *ngIf="level !== 'employee'">
           <button
             type="button"
             class="btn btn-success"
@@ -62,7 +62,11 @@
                   <span> Edit</span>
                 </button>
 
-                <button class="btn btn-danger" (click)="deleteTask(huydev._id)">
+                <button
+                  class="btn btn-danger"
+                  *ngIf="level !== 'employee'"
+                  (click)="deleteTask(huydev._id)"
+                >
                   <i class="fas fa-trash"></i>
                   <span> Delete</span>
                 </button>
@@ -93,31 +97,39 @@
                       </div>
                       <div class="modal-body">
                         <form>
+                     
+
                           <div class="form-group">
                             <label for="taskName">Task Name</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="taskName"
-                              [(ngModel)]="huydev.taskName"
-                              name="taskName"
-                              placeholder="Tên Nhiệm Vụ"
-                            />
+                         
+                              <input
+                                type="text"
+                                class="form-control"
+                                id="taskName"
+                                [(ngModel)]="huydev.taskName"
+                                name="taskName"
+                                placeholder="Tên Nhiệm Vụ"
+                                [disabled]="level === 'employee'"
+                              />
                           </div>
+                          
                           <div class="form-group">
                             <label for="description">Description</label>
-                            <textarea
-                              class="form-control"
-                              id="exampleFormControlTextarea1"
-                              rows="3"
-                              [(ngModel)]="huydev.description"
-                              name="description"
-                              placeholder="Nhập Mô Tả Nhiệm Vụ"
-                            ></textarea>
+                              <textarea
+                                class="form-control"
+                                id="description"
+                                rows="3"
+                                [(ngModel)]="huydev.description"
+                                name="description"
+                                placeholder="Nhập Mô Tả Nhiệm Vụ"
+                                [disabled]="level === 'employee'"
+                              ></textarea>     
+
                           </div>
+                          
 
                           <div class="row">
-                            <div class="col-sm-6">
+                            <div class="col" *ngIf="level !== 'employee'">
                               <div class="form-group">
                                 <label for="idProject">Project</label>
                                 <select
@@ -136,7 +148,7 @@
                                 </select>
                               </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col">
                               <div class="form-group">
                                 <label for="priority">Priority</label>
                                 <select
@@ -155,7 +167,7 @@
                           </div>
 
                           <div class="row">
-                            <div class="col-sm-6">
+                            <div class="col" *ngIf="level !== 'employee'">
                               <div class="form-group">
                                 <label for="assignedTo">Assigned To</label>
                                 <select
@@ -174,7 +186,7 @@
                                 </select>
                               </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col">
                               <div class="form-group">
                                 <label for="status">Status</label>
                                 <select
