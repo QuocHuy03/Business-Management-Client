@@ -14,6 +14,7 @@ export class RegisterComponent implements OnInit {
   email: string = '';
   area: string = '';
   password: string = '';
+  isLoading: boolean = false;
 
   areas: any;
 
@@ -40,6 +41,7 @@ export class RegisterComponent implements OnInit {
   }
 
   registerUser() {
+    this.isLoading = true;
     const userData = {
       username: this.username,
       email: this.email,
@@ -49,6 +51,7 @@ export class RegisterComponent implements OnInit {
     this.authService.register(userData).subscribe(
       (response) => {
         if (response.status === true) {
+          this.isLoading = false;
           this.toastr.success(`${response.message}`, 'Success');
           this.router.navigate(['/login']);
         } else {
