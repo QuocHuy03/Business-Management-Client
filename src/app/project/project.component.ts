@@ -44,7 +44,12 @@ export class ProjectComponent implements OnInit {
       };
       this.projectService.add(data).subscribe(
         (response) => {
-          this.toastr.success(`Thêm Project Thành Công`, 'Success');
+           if (response.status === true) {
+            this.toastr.success(`${response.message}`, 'Success');
+          } else {
+            this.toastr.error(`${response.message}`, 'Error');
+          }
+      
           this.getProjects();
           this.clearForm();
         },
