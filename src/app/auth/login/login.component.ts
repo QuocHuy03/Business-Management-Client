@@ -77,6 +77,7 @@ export class LoginComponent {
             );
           } else {
             this.toastr.error(`${response.message}`, 'Error');
+            this.isLoading = false;
             throw new Error('Login failed');
           }
         })
