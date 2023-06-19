@@ -42,10 +42,10 @@ export class TaskComponent implements OnInit {
     const level = localStorage.getItem('level');
     this.level = level;
     if (level === 'leader') {
+    } else {
       this.getTask();
       this.getProjects();
       this.getUsers();
-    } else {
       this.getTask();
     }
   }
