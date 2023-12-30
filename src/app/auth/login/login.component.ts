@@ -54,8 +54,7 @@ export class LoginComponent {
     const userData = { username: this.username, password: this.password };
     this.authService
       .login(userData)
-      .pipe(
-        switchMap((response) => {
+      .pipe(switchMap((response) => {
           if (response.status === true) {
             this.isLoading = false;
             this.toastr.success(`${response.message}`, 'Success');
@@ -76,8 +75,8 @@ export class LoginComponent {
               })
             );
           } else {
-            this.toastr.error(`${response.message}`, 'Error');
             this.isLoading = false;
+            this.toastr.error(`${response.message}`, 'Error');
             throw new Error('Login failed');
           }
         })
